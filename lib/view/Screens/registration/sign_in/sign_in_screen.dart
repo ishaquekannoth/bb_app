@@ -1,19 +1,23 @@
-import 'package:bb_app/View/widgets/custom_form_field.dart';
+import 'package:bb_app/utils/routes.dart';
+import 'package:bb_app/view/Screens/registration/widgets/custom_form_field.dart';
+import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:provider/provider.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
 class SignIn extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
-  SignIn({super.key});
+  const SignIn({super.key});
   @override
   Widget build(BuildContext context) {
+    final signInProv = Provider.of<SignInViewModel>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Form(
-        key: formKey,
+        autovalidateMode: AutovalidateMode.always,
+        key: signInProv.signInFormKey,
         child: Container(
           margin: const EdgeInsets.all(10),
           height: height * .99,
@@ -37,17 +41,19 @@ class SignIn extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: height * .03),
-                  const CustomFormField(
+                  CustomFormField(
                     hintText: "Email",
                     type: FieldType.eMail,
+                    controller: signInProv.emailController,
                   ),
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  const CustomFormField(
+                  CustomFormField(
                     hintText: "Password",
                     type: FieldType.password,
                     icon: Icons.password,
+                    controller: signInProv.passwordController,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -62,21 +68,23 @@ class SignIn extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: height * .02),
-                  GFButton(
-                    onPressed: () {
-                      formKey.currentState?.validate();
-                    },
-                    blockButton: true,
-                    shape: GFButtonShape.standard,
-                    borderShape: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    text: "Sign In",
-                    color: Theme.of(context).primaryColorDark,
-                    fullWidthButton: true,
-                    size: GFSize.LARGE,
-                    textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
+                  signInProv.isLoading
+                      ? const CircularProgressIndicator()
+                      : GFButton(
+                          onPressed: () {
+                            signInProv.onSigninButtonPress(context);
+                          },
+                          blockButton: true,
+                          shape: GFButtonShape.standard,
+                          borderShape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          text: "Sign In",
+                          color: Theme.of(context).primaryColorDark,
+                          fullWidthButton: true,
+                          size: GFSize.LARGE,
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
                   SizedBox(height: height * .02),
                   SocialLoginButton(
                       width: width * 0.71,
@@ -99,19 +107,7 @@ class SignIn extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          // // Navigator.of(context).pushNamed(SignUp.routeName);
-                          // showModalBottomSheet(
-                          //   isScrollControlled: true,
-                          //   shape: const RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.vertical(
-                          //           top: Radius.circular(20))),
-                          //   context: context,
-                          //   builder: (context) => OTPverifier(),
-                          // ).then((value) {                           
-                          //   signUpProv.clearControllers();
-                          //   signUpProv.changeOTPfieldStatus(false);
-            
-                          // });
+                          Navigator.of(context).pushNamed(Routes.test);
                         },
                       ),
                     ],
