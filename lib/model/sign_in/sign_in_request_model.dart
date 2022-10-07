@@ -7,8 +7,17 @@ class SignInRequestModel {
     required this.password,
   });
 
-  Map<String, dynamic> toJson() => {
-        "email": email,
-        "password": password,
+  Map<String, dynamic> toJson() {
+    if (email.contains('@')) {
+      return {
+        "username":email,
+        "password":password,
       };
+    } else {   
+      return {
+        "username":email,
+        "password":password,
+      };
+    }
+  }
 }

@@ -42,7 +42,7 @@ class SignIn extends StatelessWidget {
                   ),
                   SizedBox(height: height * .03),
                   CustomFormField(
-                    hintText: "Email",
+                    hintText: "Email/phone",
                     type: FieldType.eMail,
                     controller: signInProv.emailController,
                   ),

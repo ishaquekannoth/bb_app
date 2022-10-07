@@ -9,18 +9,20 @@ import 'package:dio/dio.dart';
 
 class SignInService {
   Future<SignInResponseModel?> signMeIn(SignInRequestModel data) async {
+    print(data.toJson().toString());
     final connectionOk = await isConnectionOk();
     try {
       if (connectionOk) {
         try {
           final response = await DioService.postMethod(
               url: Url.signIn, value: data.toJson());
-          if (response.statusCode! >= 200 || response.statusCode! <= 299) {
-            return SignInResponseModel.fromJson(response);
+          if (response.statusCode >= 200 || response.statusCode! <= 299) {
+            return SignInResponseModel.fromJson(response.data as Map<String,dynamic>);
+          
           }
         } on DioError catch (e) {
           if (e.response?.statusCode == 400 || e.response?.statusCode == 401) {
-            return SignInResponseModel.fromJson(e.response!.data);
+            return SignInResponseModel.fromJson(e.response?.data);
           } else {
             return SignInResponseModel(
                 isSuccess: false,
@@ -35,5 +37,6 @@ class SignInService {
     } on SocketException catch (e) {
       return SignInResponseModel(message: e.message);
     }
+    return null;
   }
 }

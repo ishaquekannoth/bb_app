@@ -68,8 +68,10 @@ class CustomFormField extends StatelessWidget {
                     return "$hintText Cant be empty";
                   } else if (value.length < 4) {
                     return "$hintText Must be 6-16 charactors long";
-                  } else if (!EmailValidator.validate(value)) {
-                    return "Invalid Email";
+                  } else if (!EmailValidator.validate(value) &&
+                      !RegExp(r'(^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$)')
+                          .hasMatch(value)) {
+                    return "Invalid Email/Phone Number";
                   } else {
                     return null;
                   }

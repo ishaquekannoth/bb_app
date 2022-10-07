@@ -1,5 +1,6 @@
 import 'package:bb_app/utils/design_widget.dart';
 import 'package:bb_app/utils/routes.dart';
+import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
 import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.signIn,
         routes: {
           Routes.signIn: (context) => const SignIn(),
+          Routes.home: (context) => const HomeScreen(),
           Routes.test: (context) => const RegistrationScreen()
         },
       ),

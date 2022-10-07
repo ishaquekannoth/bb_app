@@ -18,6 +18,7 @@ class SignInViewModel extends ChangeNotifier {
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
       final data = SignInRequestModel(email: email, password: password);
+      print(data.email.toString());
       SignInResponseModel? signInResponse =
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
@@ -26,8 +27,11 @@ class SignInViewModel extends ChangeNotifier {
         isLoadingToggler();
         return;
       } else if (signInResponse.isSuccess == true) {
+        print(signInResponse.token.toString());
+        isLoadingToggler();
         Navigator.of(context).pushNamed(Routes.home);
       } else if (signInResponse.isSuccess == false) {
+        
         ScaffoldMessenger.of(context).showSnackBar(
             ShowSnackBar.popUp(message: signInResponse.message.toString()));
         isLoadingToggler();
@@ -42,7 +46,6 @@ class SignInViewModel extends ChangeNotifier {
       return;
     }
   }
-
   void isLoadingToggler() {
     isLoading = !isLoading;
     notifyListeners();
