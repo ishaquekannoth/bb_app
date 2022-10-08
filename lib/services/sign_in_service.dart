@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 
 class SignInService {
   Future<SignInResponseModel?> signMeIn(SignInRequestModel data) async {
-    print(data.toJson().toString());
+
     final connectionOk = await isConnectionOk();
     try {
       if (connectionOk) {
