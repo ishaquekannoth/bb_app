@@ -8,16 +8,17 @@ class SignInRequestModel {
   });
 
   Map<String, dynamic> toJson() {
-    if (email.contains('@')) {
+    // if (email.contains('@')) {
       return {
         "username":email,
         "password":password,
       };
-    } else {   
-      return {
-        "username":email,
-        "password":password,
-      };
-    }
+    } 
+    // else {   
+    //   return {
+    //     "phone_number":email,
+    //     "password":password,
+    //   };
+    // }
   }
-}
+

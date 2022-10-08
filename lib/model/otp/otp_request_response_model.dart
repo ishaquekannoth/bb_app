@@ -1,12 +1,12 @@
 class OTPrequestResponseModel {
-  bool? created;
+  bool? isSuccess;
   String? message;
   String? hashKey;
-  OTPrequestResponseModel({this.created, this.hashKey, this.message});
+  OTPrequestResponseModel({this.isSuccess, this.hashKey, this.message});
 
   factory OTPrequestResponseModel.fromJson(Map<String, dynamic> json) {
     return OTPrequestResponseModel(
-      created: json['created']??false,
+      isSuccess: json['created']??false,
       message: json['message']??"",
       hashKey: json['hash']??"invalid"
     );
