@@ -8,7 +8,7 @@ class OTPrequestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pageController = Provider.of<OTPRequestViewModel>(context);
+    final pageController = Provider.of<OTPRequestResponseViewModel>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.amberAccent,
@@ -23,9 +23,12 @@ class OTPrequestScreen extends StatelessWidget {
                   controller: pageController.phoneNumberController,
                   type: FieldType.phoneNumber),
             ),
-            ElevatedButton(
-                onPressed: () => pageController.onOTPbuttonPress(context),
-                child: const Text("Request OTP"))
+            pageController.isLoading == true
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: () =>
+                        pageController.onOTPrequestButtonPress(context),
+                    child: const Text("Request OTP"))
           ],
         ),
       ),

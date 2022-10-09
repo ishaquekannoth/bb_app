@@ -14,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-      
           Container(
               height: size.height * 0.07,
               margin: const EdgeInsets.only(top: 20),
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
               child: const CupertinoSearchTextField(
                 backgroundColor: Colors.white,
               )),
-          HeadingText(
+          const HeadingText(
             text: 'Featuring the popular Hotels',
           ),
           GFCarousel(
@@ -39,9 +38,9 @@ class HomeScreen extends StatelessWidget {
                   location: "kundara",
                 );
               }).toList()),
-          HeadingText(
+          const HeadingText(
             text: "Explore Everything Nearby",
-            padding: const EdgeInsets.only(left: 10, top: 20),
+            padding: EdgeInsets.only(left: 10, top: 20),
           ),
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             itemCount: 10,
             itemBuilder: (context, index) {
               return GFListTile(
-                  avatar:  GFAvatar(
+                  avatar: GFAvatar(
                     backgroundImage: NetworkImage(bridalImage),
                     size: GFSize.LARGE,
                     shape: GFAvatarShape.square,

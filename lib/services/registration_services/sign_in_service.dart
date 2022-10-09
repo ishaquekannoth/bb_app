@@ -14,7 +14,7 @@ class SignInService {
     if (connectionOk) {
       try {
         final response =
-            await DioService.postMethod(url: Url.signIn, value: data.toJson());
+            await DioService.postMethod(url: MyApiUrl.signIn, value: data.toJson());
         if (response.statusCode >= 200 || response.statusCode <= 299) {
           return SignInResponseModel.fromJson(
               response.data as Map<String, dynamic>);

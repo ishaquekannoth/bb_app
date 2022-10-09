@@ -38,9 +38,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_otp_text_field: ^1.1.1
+  fluttertoast: ^8.0.9
   getwidget: ^3.0.1
   google_fonts: ^3.0.1
   internet_connection_checker: ^1.0.0+1
+  pin_code_fields: ^7.4.0
   provider: ^6.0.3
   social_login_buttons: ^1.0.6+2
 

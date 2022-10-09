@@ -3,6 +3,7 @@ class Routes {
   static const otpRequestScreen = '/otpRequest';
   static const mainDisplayer = "/mainDisplayer";
   static const home = "/home";
+   static const otpModalScreen = "/otpModalScreen";
   static const searchScreen = '/searchScreen';
   static const favourites = '/favouritesScreen';
   static const profile = '/profileScreen'; 

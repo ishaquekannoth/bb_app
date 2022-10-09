@@ -11,7 +11,7 @@ class SignInViewModel extends ChangeNotifier {
   bool isLoading = false;
   final signInFormKey = GlobalKey<FormState>();
 
-  void onSigninButtonPress(BuildContext context) async {
+  void onSigninButtonPress(context) async {
     if (signInFormKey.currentState!.validate()) {
       isLoading = true;
       notifyListeners();
@@ -21,7 +21,7 @@ class SignInViewModel extends ChangeNotifier {
       SignInResponseModel? signInResponse =
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
-        ShowMySnackBar.popUpSnackBar(context,
+        ShowMyPopUp.popUpSnackBar(context,popUpType: PopUpType.snackBar,
             message: 'No response..Try Again');
         isLoadingToggler();
         return;
@@ -36,7 +36,7 @@ class SignInViewModel extends ChangeNotifier {
       //   return;
       // }
       else {
-      ShowMySnackBar.popUpSnackBar(context,
+      ShowMyPopUp.popUpSnackBar(context,popUpType: PopUpType.snackBar,
             message: signInResponse.message.toString());
         isLoadingToggler();
         return;

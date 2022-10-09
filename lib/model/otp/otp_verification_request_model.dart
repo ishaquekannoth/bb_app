@@ -1,12 +1,12 @@
 class OTPverificationRequestModel {
-  final String hash;
+  final String hashkey;
   final String otp;
 
-  OTPverificationRequestModel({required this.hash, required this.otp});
+  OTPverificationRequestModel({required this.hashkey, required this.otp});
     Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['otp'] = otp;
-    data['hash'] = hash;
+    data['hash'] = hashkey;
     return data;
   }
 }

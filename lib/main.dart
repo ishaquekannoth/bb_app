@@ -3,6 +3,7 @@ import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
+import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_request_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view/Screens/search/search_screen.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           create: (context) => MainPageViewModel()
         ),
               ChangeNotifierProvider(
-          create: (context) => OTPRequestViewModel()
+          create: (context) => OTPRequestResponseViewModel()
         ),
       ],
       child: MaterialApp(
@@ -41,12 +42,13 @@ class MyApp extends StatelessWidget {
           fontFamily: GoogleFonts.montserrat().fontFamily,
           primarySwatch: Colors.deepPurple,
         ),
-        initialRoute: Routes.otpRequestScreen,
+        initialRoute: Routes.signIn,
         routes: {
           Routes.mainDisplayer: (context) => const MainDisplayer(),
           Routes.home: (context) => const HomeScreen(),
           Routes.signIn: (context) => const SignIn(),
           Routes.otpRequestScreen:(context) => const OTPrequestScreen(),
+          Routes.otpModalScreen: (context) => const OTPmodalWidget(),
           Routes.searchScreen: (context) => const SearchScreen(),
           Routes.favourites: (context) => const FavouritesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
