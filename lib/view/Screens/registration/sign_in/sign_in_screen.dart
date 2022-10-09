@@ -107,7 +107,7 @@ class SignIn extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(Routes.test);
+                          Navigator.of(context).pushNamed(Routes.otpRequestScreen);
                         },
                       ),
                     ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ShowSnackBar {
-  static SnackBar popUp({required String message, Color? color}) {
-    return SnackBar(
+class ShowMySnackBar {
+  static popUpSnackBar(BuildContext context,{required String message, Color? color}) {
+    return 
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5))),
         duration: const Duration(seconds: 1),
@@ -13,7 +14,7 @@ class ShowSnackBar {
           message,
           style: const TextStyle(
               letterSpacing: 2, fontWeight: FontWeight.w500, fontSize: 14),
-              textAlign: TextAlign.center,
-        ));
+          textAlign: TextAlign.center,
+        )));
   }
 }

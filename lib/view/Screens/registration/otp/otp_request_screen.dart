@@ -23,7 +23,9 @@ class OTPrequestScreen extends StatelessWidget {
                   controller: pageController.phoneNumberController,
                   type: FieldType.phoneNumber),
             ),
-            ElevatedButton(onPressed:() => pageController.onOTPbuttonPress(context), child: Text("Request OTP"))
+            ElevatedButton(
+                onPressed: () => pageController.onOTPbuttonPress(context),
+                child: const Text("Request OTP"))
           ],
         ),
       ),

@@ -8,7 +8,8 @@ import 'package:bb_app/utils/Url.dart';
 import 'package:dio/dio.dart';
 
 class OTPService {
-  Future<OTPrequestResponseModel?> otpRequestService(OTPrequestModel data) async {
+  Future<OTPrequestResponseModel?> otpRequestService(
+      OTPrequestModel data) async {
     final connectionOk = await isConnectionOk();
     if (connectionOk) {
       try {
@@ -24,20 +25,17 @@ class OTPService {
         } else if (e.response?.statusCode == 500) {
           return OTPrequestResponseModel(message: e.message);
         } else {
-          return OTPrequestResponseModel(message: "Unknown Err");
+          return OTPrequestResponseModel(message: "Server unreachable");
         }
       } on SocketException catch (e) {
         return OTPrequestResponseModel(message: e.message);
-      }
-      on FormatException catch(e){
+      } on FormatException catch (e) {
+       
         return OTPrequestResponseModel(message: e.message);
-      } 
+      }
     } else {
       return OTPrequestResponseModel(message: "Oops..No network");
     }
     return null;
   }
-
-
-
 }

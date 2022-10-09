@@ -26,7 +26,7 @@ class SignInService {
           return SignInResponseModel(message: "Internal server Err");
         } else {
           return SignInResponseModel(
-              isSuccess: false, message: "Unknown  Err", token: "Invalid");
+              isSuccess: false, message: "Server unreachable", token: "Invalid");
         }
       } on SocketException catch (e) {
         return SignInResponseModel(message: e.message);

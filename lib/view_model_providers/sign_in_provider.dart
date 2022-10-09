@@ -21,29 +21,31 @@ class SignInViewModel extends ChangeNotifier {
       SignInResponseModel? signInResponse =
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            ShowSnackBar.popUp(message: 'No response..Try Again'));
+        ShowMySnackBar.popUpSnackBar(context,
+            message: 'No response..Try Again');
         isLoadingToggler();
         return;
       } else if (signInResponse.isSuccess == true) {
         isLoadingToggler();
         Navigator.of(context).pushNamed(Routes.mainDisplayer);
-      } else if (signInResponse.isSuccess == false) {
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-            ShowSnackBar.popUp(message: signInResponse.message.toString()));
-        isLoadingToggler();
-        return;
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowSnackBar.popUp(message: "Something went wrong"));
+      }
+      //  else if (signInResponse.isSuccess == false) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //       ShowSnackBar.popUp(message: signInResponse.message.toString()));
+      //   isLoadingToggler();
+      //   return;
+      // }
+      else {
+      ShowMySnackBar.popUpSnackBar(context,
+            message: signInResponse.message.toString());
         isLoadingToggler();
         return;
       }
     } else {
-      return;
+      return null;
     }
   }
+
   void isLoadingToggler() {
     isLoading = !isLoading;
     notifyListeners();

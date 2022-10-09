@@ -18,30 +18,22 @@ class OTPRequestViewModel extends ChangeNotifier {
       final data = OTPrequestModel(phoneNumber: phoneNumber);
       OTPrequestResponseModel? otpRequestResponse =
           await OTPService().otpRequestService(data);
-      print(otpRequestResponse?.isSuccess);
       if (otpRequestResponse == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            ShowSnackBar.popUp(message: 'No response..Try Again'));
+        ShowMySnackBar.popUpSnackBar(context,
+            message: 'No response..Try Again');
         isLoadingToggler();
-        print(otpRequestResponse?.isSuccess);
         return;
       } else if (otpRequestResponse.isSuccess == true) {
         isLoadingToggler();
         Navigator.of(context).pushNamed(Routes.test);
-         print(otpRequestResponse.isSuccess);
-      } else if (otpRequestResponse.isSuccess == false) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            ShowSnackBar.popUp(message: otpRequestResponse.message.toString()));
-        isLoadingToggler();
-        return;
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(ShowSnackBar.popUp(message: "Something went wrong"));
+        ShowMySnackBar.popUpSnackBar(context,
+            message: otpRequestResponse.message.toString());
         isLoadingToggler();
         return;
       }
     } else {
-      return;
+      return null;
     }
   }
 
