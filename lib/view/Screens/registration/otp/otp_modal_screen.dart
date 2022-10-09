@@ -5,18 +5,19 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 
 class OTPmodalWidget extends StatelessWidget {
-  const OTPmodalWidget({this.otpResponseWithHash,super.key});
+  const OTPmodalWidget({this.otpResponseWithHash, super.key});
   final OTPrequestResponseModel? otpResponseWithHash;
   @override
   Widget build(BuildContext context) {
     final pageController = Provider.of<OTPRequestResponseViewModel>(context);
-    final routeArgs =
-        ModalRoute.of(context)!.settings.arguments as OTPrequestResponseModel;
-    return Form(
-      key: pageController.otpVerificationFormKey,
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
+    // final routeArgs =
+    //     ModalRoute.of(context)!.settings.arguments as OTPrequestResponseModel;
+    return SingleChildScrollView(
+      child: Form(
+        key: pageController.otpVerificationFormKey,
+        child: Container(
+          height: MediaQuery.of(context).size.height * .6,
+          margin: const EdgeInsets.all(25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,7 +50,7 @@ class OTPmodalWidget extends StatelessWidget {
                   ? const CircularProgressIndicator()
                   : ElevatedButton(
                       onPressed: () {
-                        pageController.onVerifyOTP(routeArgs, context);
+                        pageController.onVerifyOTP(context);
                       },
                       child: const Text('Verify'))
             ],
