@@ -1,6 +1,7 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/registration/widgets/custom_form_field.dart';
+import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
@@ -109,7 +110,10 @@ class SignIn extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(Routes.otpRequestScreen);
+                          Provider.of<OTPRequestResponseViewModel>(context,listen: false)
+                              .disposeControllers();
+                          Navigator.of(context)
+                              .pushNamed(Routes.otpRequestScreen);
                         },
                       ),
                     ],

@@ -21,28 +21,21 @@ class SignInViewModel extends ChangeNotifier {
       SignInResponseModel? signInResponse =
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
-        ShowMyPopUp.popUpMessenger(context,type:PopUpType.snackBar,
-            message: 'No response..Try Again');
+        ShowMyPopUp.popUpMessenger(context,
+            type: PopUpType.snackBar, message: 'No response..Try Again');
         isLoadingToggler();
         return;
       } else if (signInResponse.isSuccess == true) {
         isLoadingToggler();
         Navigator.of(context).pushNamed(Routes.mainDisplayer);
-      }
-      //  else if (signInResponse.isSuccess == false) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //       ShowSnackBar.popUp(message: signInResponse.message.toString()));
-      //   isLoadingToggler();
-      //   return;
-      // }
-      else {
-      ShowMyPopUp.popUpMessenger(context,type:PopUpType.snackBar,
+      } else {
+        ShowMyPopUp.popUpMessenger(context,
+            type: PopUpType.snackBar,
             message: signInResponse.message.toString());
         isLoadingToggler();
         return;
       }
-    } else {
-      return null;
+    
     }
   }
 

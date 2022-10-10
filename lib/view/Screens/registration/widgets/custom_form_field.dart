@@ -21,7 +21,7 @@ class CustomFormField extends StatelessWidget {
       this.icon = Icons.email});
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+   // final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Padding(
       padding: padding,
@@ -100,7 +100,7 @@ class CustomFormField extends StatelessWidget {
                       ? (value) {
                           if (value == '' || value == null) {
                             return "$hintText Cant be empty";
-                          } else if (value.length < 6 || value.length > 16) {
+                          } else if (value.length < 4 || value.length > 16) {
                             return "User Name must be 4-14 Charactors";
                           } else {
                             return null;

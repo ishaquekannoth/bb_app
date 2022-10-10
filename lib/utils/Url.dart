@@ -3,5 +3,5 @@ class MyApiUrl {
   static const String sendOtpSms = "send_otp";
   static const String verifyOtp = "otp_verify";
   static const String signIn = "login_user";
-
+  static const String signUp = "user_signup";
 }

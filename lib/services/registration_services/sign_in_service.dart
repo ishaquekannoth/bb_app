@@ -13,8 +13,8 @@ class SignInService {
 
     if (connectionOk) {
       try {
-        final response =
-            await DioService.postMethod(url: MyApiUrl.signIn, value: data.toJson());
+        final response = await DioService.postMethod(
+            url: MyApiUrl.signIn, value: data.toJson());
         if (response.statusCode >= 200 || response.statusCode <= 299) {
           return SignInResponseModel.fromJson(
               response.data as Map<String, dynamic>);
@@ -24,16 +24,21 @@ class SignInService {
           return SignInResponseModel.fromJson(e.response?.data);
         } else if (e.response?.statusCode == 500) {
           return SignInResponseModel(message: "Internal server Err");
+        } else if (e.type == DioErrorType.sendTimeout ||
+            e.type == DioErrorType.connectTimeout ||
+            e.type == DioErrorType.receiveTimeout) {
+          return SignInResponseModel(message: "Request timed out");
         } else {
           return SignInResponseModel(
-              isSuccess: false, message: "Server unreachable", token: "Invalid");
+              isSuccess: false,
+              message: "Server unreachable",
+              token: "Invalid");
         }
       } on SocketException catch (e) {
         return SignInResponseModel(message: e.message);
-      }
-       on FormatException catch(e){
+      } on FormatException catch (e) {
         return SignInResponseModel(message: e.message);
-      }  on Exception catch(e){
+      } on Exception catch (e) {
         return SignInResponseModel(message: e.toString());
       }
     } else {

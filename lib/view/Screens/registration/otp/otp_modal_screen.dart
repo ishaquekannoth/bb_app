@@ -14,7 +14,6 @@ class OTPmodalWidget extends StatelessWidget {
     //     ModalRoute.of(context)!.settings.arguments as OTPrequestResponseModel;
     return Scaffold(
       body: Container(
-        
         margin: const EdgeInsets.all(25),
         child: Form(
           key: pageController.otpVerificationFormKey,
@@ -52,7 +51,10 @@ class OTPmodalWidget extends StatelessWidget {
                       onPressed: () {
                         pageController.onVerifyOTP(context);
                       },
-                      child: const Text('Verify'))
+                      child: const Text('Verify')),
+              TextButton(
+                  onPressed: () => pageController.onChangeRequest(context),
+                  child: const Text("Try with another number"))
             ],
           ),
         ),

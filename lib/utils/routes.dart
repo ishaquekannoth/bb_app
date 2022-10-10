@@ -1,5 +1,6 @@
 class Routes {
   static const signIn = '/signIn';
+  static const signUp = '/signUp';
   static const otpRequestScreen = '/otpRequest';
   static const mainDisplayer = "/mainDisplayer";
   static const home = "/home";
@@ -10,7 +11,5 @@ class Routes {
   static const firms = '/hotels';
   static const payments = '/payments';
   static const orderHistory = '/history';
- 
 
-  static const test = '/test';
 }

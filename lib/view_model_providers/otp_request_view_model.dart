@@ -1,5 +1,3 @@
-
-
 import 'package:bb_app/model/otp/otp_request_model.dart';
 import 'package:bb_app/model/otp/otp_request_response_model.dart';
 import 'package:bb_app/model/otp/otp_verification_request_model.dart';
@@ -17,6 +15,7 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
   final otpVerificationFormKey = GlobalKey<FormState>();
   bool isLoading = false;
   String hashForOtp = "";
+  String phoneNumber = "";
 
   onOTPrequestButtonPress(context) async {
     if (otpFormKey.currentState!.validate()) {
@@ -27,7 +26,8 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
       OTPrequestResponseModel? otpRequestResponse =
           await OTPService().otpRequestService(data);
       if (otpRequestResponse == null) {
-        ShowMyPopUp.popUpMessenger(context, message: 'No response..Try Again',type: PopUpType.snackBar);
+        ShowMyPopUp.popUpMessenger(context,
+            message: 'No response..Try Again', type: PopUpType.snackBar);
         isLoadingToggler();
         return;
       } else if (otpRequestResponse.isSuccess == true) {
@@ -37,7 +37,8 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
         //     .pushNamed(Routes.otpModalScreen);
         popUpModalSheet(context);
       } else {
-        ShowMyPopUp.popUpMessenger(context,type: PopUpType.snackBar,
+        ShowMyPopUp.popUpMessenger(context,
+            type: PopUpType.snackBar,
             message: otpRequestResponse.message.toString());
         isLoadingToggler();
         return;
@@ -58,21 +59,25 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
           await OTPService().otpVerificationService(data);
 
       if (verificationResponse == null) {
-        ShowMyPopUp.popUpMessenger(context, message: 'No response..Try Again',type: PopUpType.toast);
+        ShowMyPopUp.popUpMessenger(context,
+            message: 'No response..Try Again', type: PopUpType.toast);
         isLoadingToggler();
         return;
       } else if (verificationResponse.success == true) {
         isLoadingToggler();
-        Navigator.of(context)
-            .pushNamed(Routes.test, arguments: phoneNumberController.text);
+        phoneNumber = phoneNumberController.text;
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.signUp, (Route<dynamic> route) => false,
+            arguments: phoneNumber);
       } else {
-        ShowMyPopUp.popUpMessenger(context,type: PopUpType.toast,
-         message:verificationResponse.message.toString());
+        ShowMyPopUp.popUpMessenger(context,
+            type: PopUpType.toast,
+            message: verificationResponse.message.toString());
         isLoadingToggler();
         return;
       }
     }
-    // return null;
+    return null;
   }
 
   void isLoadingToggler() {
@@ -84,5 +89,11 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
     phoneNumberController.clear();
     otpController.clear();
     notifyListeners();
+  }
+
+  void onChangeRequest(BuildContext context) {
+    disposeControllers();
+    notifyListeners();
+    Navigator.of(context).pop();
   }
 }

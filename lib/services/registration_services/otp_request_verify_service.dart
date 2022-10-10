@@ -26,6 +26,10 @@ class OTPService {
           return OTPrequestResponseModel.fromJson(e.response?.data);
         } else if (e.response?.statusCode == 500) {
           return OTPrequestResponseModel(message: e.message);
+        } else if (e.type == DioErrorType.sendTimeout ||
+            e.type == DioErrorType.connectTimeout ||
+            e.type == DioErrorType.receiveTimeout) {
+          return OTPrequestResponseModel(message: "Request timed out");
         } else {
           return OTPrequestResponseModel(message: "Server unreachable");
         }
@@ -59,7 +63,14 @@ class OTPService {
           return OTPverificationResponseModel.fromJson(e.response?.data);
         } else if (e.response?.statusCode == 500) {
           return OTPverificationResponseModel(message: e.message);
-        } else {
+        } 
+        else if (e.type == DioErrorType.sendTimeout ||
+            e.type == DioErrorType.connectTimeout ||
+            e.type == DioErrorType.receiveTimeout) {
+          return OTPverificationResponseModel(message: "Request timed out");
+        }
+        
+        else {
           return OTPverificationResponseModel(message: "Server unreachable");
         }
       } on SocketException catch (e) {
