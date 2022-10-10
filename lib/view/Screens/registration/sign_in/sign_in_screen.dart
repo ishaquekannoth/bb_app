@@ -1,3 +1,4 @@
+import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/registration/widgets/custom_form_field.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
@@ -14,6 +15,7 @@ class SignIn extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: KColors.kWhiteColor,
       resizeToAvoidBottomInset: true,
       body: Form(
         autovalidateMode: AutovalidateMode.always,

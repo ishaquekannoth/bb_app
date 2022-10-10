@@ -1,3 +1,5 @@
+
+
 import 'package:bb_app/model/otp/otp_request_model.dart';
 import 'package:bb_app/model/otp/otp_request_response_model.dart';
 import 'package:bb_app/model/otp/otp_verification_request_model.dart';
@@ -25,8 +27,7 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
       OTPrequestResponseModel? otpRequestResponse =
           await OTPService().otpRequestService(data);
       if (otpRequestResponse == null) {
-        ShowMyPopUp.popUpSnackBar(context,
-            popUpType: PopUpType.snackBar, message: 'No response..Try Again');
+        ShowMyPopUp.popUpMessenger(context, message: 'No response..Try Again',type: PopUpType.snackBar);
         isLoadingToggler();
         return;
       } else if (otpRequestResponse.isSuccess == true) {
@@ -36,8 +37,7 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
         //     .pushNamed(Routes.otpModalScreen);
         popUpModalSheet(context);
       } else {
-        ShowMyPopUp.popUpSnackBar(context,
-            popUpType: PopUpType.snackBar,
+        ShowMyPopUp.popUpMessenger(context,type: PopUpType.snackBar,
             message: otpRequestResponse.message.toString());
         isLoadingToggler();
         return;
@@ -58,8 +58,7 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
           await OTPService().otpVerificationService(data);
 
       if (verificationResponse == null) {
-        ShowMyPopUp.popUpSnackBar(context,
-            popUpType: PopUpType.snackBar, message: 'No response..Try Again');
+        ShowMyPopUp.popUpMessenger(context, message: 'No response..Try Again',type: PopUpType.toast);
         isLoadingToggler();
         return;
       } else if (verificationResponse.success == true) {
@@ -67,14 +66,13 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
         Navigator.of(context)
             .pushNamed(Routes.test, arguments: phoneNumberController.text);
       } else {
-        ShowMyPopUp.popUpSnackBar(context,
-            popUpType: PopUpType.snackBar,
-            message: verificationResponse.message.toString());
+        ShowMyPopUp.popUpMessenger(context,type: PopUpType.toast,
+         message:verificationResponse.message.toString());
         isLoadingToggler();
         return;
       }
     }
-    return null;
+    // return null;
   }
 
   void isLoadingToggler() {

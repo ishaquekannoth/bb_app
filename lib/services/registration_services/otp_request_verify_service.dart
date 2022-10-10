@@ -33,6 +33,8 @@ class OTPService {
         return OTPrequestResponseModel(message: e.message);
       } on FormatException catch (e) {
         return OTPrequestResponseModel(message: e.message);
+      } on Exception catch (e) {
+        return OTPrequestResponseModel(message: e.toString());
       }
     } else {
       return OTPrequestResponseModel(message: "Oops..No network");

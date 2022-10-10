@@ -33,7 +33,9 @@ class SignInService {
       }
        on FormatException catch(e){
         return SignInResponseModel(message: e.message);
-      } 
+      }  on Exception catch(e){
+        return SignInResponseModel(message: e.toString());
+      }
     } else {
       return SignInResponseModel(
           message: "Oops..No network", isSuccess: false, token: "Invalid");

@@ -29,11 +29,11 @@ class HomeScreen extends StatelessWidget {
               autoPlay: true,
               enlargeMainPage: true,
               viewportFraction: 0.5,
-              height: size.height * 0.2,
+               height: size.height * 0.2,
               items: imageList.map((url) {
                 return ImageWithTextCard(
-                  image:
-                      Uri.parse(url).hasAbsolutePath ? NetworkImage(url) : null,
+                  imageUrl: url,
+                  // Uri.parse(url).hasAbsolutePath ? NetworkImage(url) : null,
                   hotelName: "Andi aapeees",
                   location: "kundara",
                 );

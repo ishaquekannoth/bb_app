@@ -21,7 +21,7 @@ class SignInViewModel extends ChangeNotifier {
       SignInResponseModel? signInResponse =
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
-        ShowMyPopUp.popUpSnackBar(context,popUpType: PopUpType.snackBar,
+        ShowMyPopUp.popUpMessenger(context,type:PopUpType.snackBar,
             message: 'No response..Try Again');
         isLoadingToggler();
         return;
@@ -36,7 +36,7 @@ class SignInViewModel extends ChangeNotifier {
       //   return;
       // }
       else {
-      ShowMyPopUp.popUpSnackBar(context,popUpType: PopUpType.snackBar,
+      ShowMyPopUp.popUpMessenger(context,type:PopUpType.snackBar,
             message: signInResponse.message.toString());
         isLoadingToggler();
         return;

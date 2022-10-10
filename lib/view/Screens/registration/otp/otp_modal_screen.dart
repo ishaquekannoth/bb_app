@@ -12,12 +12,12 @@ class OTPmodalWidget extends StatelessWidget {
     final pageController = Provider.of<OTPRequestResponseViewModel>(context);
     // final routeArgs =
     //     ModalRoute.of(context)!.settings.arguments as OTPrequestResponseModel;
-    return SingleChildScrollView(
-      child: Form(
-        key: pageController.otpVerificationFormKey,
-        child: Container(
-          height: MediaQuery.of(context).size.height * .6,
-          margin: const EdgeInsets.all(25),
+    return Scaffold(
+      body: Container(
+        
+        margin: const EdgeInsets.all(25),
+        child: Form(
+          key: pageController.otpVerificationFormKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

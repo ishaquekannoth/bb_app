@@ -2,16 +2,18 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-enum FieldType { eMail, password, normalInputField,phoneNumber }
+enum FieldType { eMail, password, normalInputField, phoneNumber }
 
 class CustomFormField extends StatelessWidget {
   final FieldType type;
   final String? hintText;
   final IconData? icon;
   final bool? obscureText;
+  final EdgeInsetsGeometry padding;
   final TextEditingController? controller;
   const CustomFormField(
       {this.obscureText,
+      this.padding=const EdgeInsets.all(5),
       this.controller,
       required this.type,
       this.hintText = "E-mail",
@@ -22,22 +24,30 @@ class CustomFormField extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.all(width * 0.01),
+      padding: padding,
       child: TextFormField(
           controller: controller,
           inputFormatters: [
             type == FieldType.eMail
                 ? LengthLimitingTextInputFormatter(25)
                 : type == FieldType.normalInputField
-                    ? LengthLimitingTextInputFormatter(15):type==FieldType.phoneNumber?LengthLimitingTextInputFormatter(10)
-                    : LengthLimitingTextInputFormatter(20),
+                    ? LengthLimitingTextInputFormatter(15)
+                    : type == FieldType.phoneNumber
+                        ? LengthLimitingTextInputFormatter(10)
+                        : LengthLimitingTextInputFormatter(20),
             type == FieldType.normalInputField
-                ? FilteringTextInputFormatter.allow(RegExp("[A-Z a-z]")):
-                type==FieldType.phoneNumber?FilteringTextInputFormatter.allow(RegExp("[0-9]")):FilteringTextInputFormatter.deny(RegExp("")),
+                ? FilteringTextInputFormatter.allow(RegExp("[A-Z a-z]"))
+                : type == FieldType.phoneNumber
+                    ? FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                    : FilteringTextInputFormatter.deny(RegExp("")),
           ],
           keyboardType: type == FieldType.eMail
-              ? TextInputType.emailAddress:type==FieldType.password?
-               TextInputType.name:type==FieldType.phoneNumber?TextInputType.phone:TextInputType.name,
+              ? TextInputType.emailAddress
+              : type == FieldType.password
+                  ? TextInputType.name
+                  : type == FieldType.phoneNumber
+                      ? TextInputType.phone
+                      : TextInputType.name,
           //autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: type == FieldType.password,
           decoration: InputDecoration(
@@ -86,23 +96,25 @@ class CustomFormField extends StatelessWidget {
                         return null;
                       }
                     }
-                  :type==FieldType.normalInputField? (value) {
-                      if (value == '' || value == null) {
-                        return "$hintText Cant be empty";
-                      } else if (value.length < 6 || value.length > 16) {
-                        return "User Name must be 4-14 Charactors";
-                      } else {
-                        return null;
-                      }
-                    }:(value) {
-                      if (value == '' || value == null) {
-                        return "$hintText Cant be empty";
-                      } else if (value.length<10) {
-                        return "Phone number Invalid";
-                      } else {
-                        return null;
-                      }
-                    }),
+                  : type == FieldType.normalInputField
+                      ? (value) {
+                          if (value == '' || value == null) {
+                            return "$hintText Cant be empty";
+                          } else if (value.length < 6 || value.length > 16) {
+                            return "User Name must be 4-14 Charactors";
+                          } else {
+                            return null;
+                          }
+                        }
+                      : (value) {
+                          if (value == '' || value == null) {
+                            return "$hintText Cant be empty";
+                          } else if (value.length < 10) {
+                            return "Phone number Invalid";
+                          } else {
+                            return null;
+                          }
+                        }),
     );
   }
 }

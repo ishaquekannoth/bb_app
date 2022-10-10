@@ -1,13 +1,16 @@
 import 'package:bb_app/utils/colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageWithTextCard extends StatelessWidget {
-  const ImageWithTextCard({Key? key, this.image, this.hotelName, this.location})
+  const ImageWithTextCard(
+      {Key? key, required this.imageUrl, this.hotelName, this.location})
       : super(key: key);
 
-  final ImageProvider? image;
+  final String imageUrl;
   final String? hotelName;
   final String? location;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,12 +18,23 @@ class ImageWithTextCard extends StatelessWidget {
         children: [
           (Container(
             margin: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                    image: image ??
-                        Image.asset("lib/assets/images/NoImage.png").image,
-                    fit: BoxFit.cover)),
+            child: Center(
+              child: CachedNetworkImage(
+                fit: BoxFit.contain,
+                imageUrl: imageUrl,
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    Image.asset("lib/assets/images/NoImage.png"),
+              ),
+            ),
+
+            // decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(10),
+            //     image: DecorationImage(
+            //         image: image ??
+            //             Image.asset("lib/assets/images/NoImage.png").image,
+            //         fit: BoxFit.cover)),
           )),
           Positioned(
               bottom: 25,
