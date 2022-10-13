@@ -1,3 +1,4 @@
+import 'package:bb_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -15,7 +16,7 @@ class ShowMyPopUp {
             borderRadius: BorderRadius.all(Radius.circular(5))),
         duration: const Duration(seconds: 1),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: snackbarColor??Colors.red,
+        backgroundColor: snackbarColor??KColors.kRedColor,
         margin: const EdgeInsets.all(10),
         content: Text(
           message,

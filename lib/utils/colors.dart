@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class KColors {
-  static const Color kThemePurple = Color(0xff4A235A);
+  static const Color kThemePurple = Color(0xff7d039e);
   static const Color kThemeYellow = Color(0xffFBA808);
+  static const Color kRedColor = Color(0xff700202);
   static const Color kThemeOnboarding = Color(0xffFDF5DB);
   static const Color kSliderColor = Color(0xff00AD8F);
   static const Color kTextFieldColor = Color.fromARGB(255, 229, 229, 229);

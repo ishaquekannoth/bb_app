@@ -34,8 +34,8 @@ class HomeScreen extends StatelessWidget {
                 return ImageWithTextCard(
                   imageUrl: url,
                   // Uri.parse(url).hasAbsolutePath ? NetworkImage(url) : null,
-                  hotelName: "Andi aapeees",
-                  location: "kundara",
+                  hotelName: "Hotel",
+                  location: "Location",
                 );
               }).toList()),
           const HeadingText(

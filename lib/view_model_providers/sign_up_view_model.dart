@@ -1,3 +1,5 @@
+
+
 import 'package:bb_app/model/sign_up/sign_up_request_model.dart';
 import 'package:bb_app/model/sign_up/sign_up_response_model.dart';
 import 'package:bb_app/utils/routes.dart';
@@ -33,7 +35,7 @@ class SignUpViewModel extends ChangeNotifier {
         isLoadingToggler();
         ShowMyPopUp.popUpMessenger(context,
             type: PopUpType.toast, message: 'Registered Successfully');
-     await Future.delayed(const Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
         Navigator.of(context).pushNamedAndRemoveUntil(
             Routes.mainDisplayer, (Route<dynamic> route) => false);
       } else {

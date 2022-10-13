@@ -1,6 +1,7 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/registration/widgets/custom_form_field.dart';
+import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,11 @@ class SignIn extends StatelessWidget {
                           textStyle: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         ),
+                  HeadingText(
+                    text: "OR",
+                    margin: EdgeInsets.only(top: 20, left: width * 0.4),
+                    style: const TextStyle(fontSize: 20),
+                  ),
                   SizedBox(height: height * .02),
                   SocialLoginButton(
                       width: width * 0.71,
@@ -95,14 +101,9 @@ class SignIn extends StatelessWidget {
                       buttonType: SocialLoginButtonType.google,
                       onPressed: () {}),
                   SizedBox(height: height * .02),
-                  SocialLoginButton(
-                      width: width * 0.71,
-                      height: height * 0.05,
-                      buttonType: SocialLoginButtonType.facebook,
-                      onPressed: () {}),
                   SizedBox(height: height * .02),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                         child: const Text(
@@ -110,7 +111,8 @@ class SignIn extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          Provider.of<OTPRequestResponseViewModel>(context,listen: false)
+                          Provider.of<OTPRequestResponseViewModel>(context,
+                                  listen: false)
                               .disposeControllers();
                           Navigator.of(context)
                               .pushNamed(Routes.otpRequestScreen);

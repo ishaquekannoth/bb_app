@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           fontFamily: GoogleFonts.montserrat().fontFamily,
           primarySwatch: Colors.deepPurple,
         ),
-        initialRoute: Routes.signUp,
+        initialRoute: Routes.signIn,
         routes: {
           Routes.mainDisplayer: (context) => const MainDisplayer(),
           Routes.home: (context) => const HomeScreen(),
