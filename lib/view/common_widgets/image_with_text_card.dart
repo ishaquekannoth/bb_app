@@ -3,13 +3,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageWithTextCard extends StatelessWidget {
-  const ImageWithTextCard(
-      {Key? key, required this.imageUrl, this.hotelName, this.location})
+   ImageWithTextCard(
+     
+      {Key? key, required this.imageUrl, this.hotelName, this.location, this.height,this.width,})
       : super(key: key);
 
   final String imageUrl;
   final String? hotelName;
   final String? location;
+  double? height;
+  double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,8 @@ class ImageWithTextCard extends StatelessWidget {
       child: Stack(
         children: [
           (Container(
+            height: height,
+            width: width,
             margin: const EdgeInsets.all(8.0),
             child: Center(
               child: CachedNetworkImage(

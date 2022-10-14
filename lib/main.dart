@@ -1,6 +1,7 @@
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
+import 'package:bb_app/view/Screens/hotels/single_hotel_details.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_request_screen.dart';
@@ -26,18 +27,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => SignInViewModel()),
+        ChangeNotifierProvider(create: (context) => MainPageViewModel()),
         ChangeNotifierProvider(
-          create: (context) => SignInViewModel()
-        ),
-             ChangeNotifierProvider(
-          create: (context) => MainPageViewModel()
-        ),
-              ChangeNotifierProvider(
-          create: (context) => OTPRequestResponseViewModel()
-        ),
-               ChangeNotifierProvider(
-          create: (context) => SignUpViewModel()
-        ),
+            create: (context) => OTPRequestResponseViewModel()),
+        ChangeNotifierProvider(create: (context) => SignUpViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -46,17 +40,19 @@ class MyApp extends StatelessWidget {
           fontFamily: GoogleFonts.montserrat().fontFamily,
           primarySwatch: Colors.deepPurple,
         ),
-        initialRoute: Routes.signIn,
+        initialRoute: Routes.singleHotelDetails,
         routes: {
           Routes.mainDisplayer: (context) => const MainDisplayer(),
           Routes.home: (context) => const HomeScreen(),
           Routes.signIn: (context) => const SignIn(),
-          Routes.otpRequestScreen:(context) => const OTPrequestScreen(),
+          Routes.otpRequestScreen: (context) => const OTPrequestScreen(),
           Routes.otpModalScreen: (context) => const OTPmodalWidget(),
           Routes.searchScreen: (context) => const SearchScreen(),
           Routes.favourites: (context) => const FavouritesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
-          Routes.signUp: (context) => const SignUpScreen()
+          Routes.signUp: (context) => const SignUpScreen(),
+          Routes.singleHotelDetails: (context) =>
+              const SingleHotelDetailsScreen()
         },
       ),
     );
