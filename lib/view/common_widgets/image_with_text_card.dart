@@ -3,20 +3,27 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageWithTextCard extends StatelessWidget {
-   ImageWithTextCard(
-     
-      {Key? key, required this.imageUrl, this.hotelName, this.location, this.height,this.width,})
-      : super(key: key);
+  const ImageWithTextCard({
+    required this.onTap,
+    Key? key,
+    required this.imageUrl,
+    this.hotelName,
+    this.location,
+    this.height,
+    this.width,
+  }) : super(key: key);
 
   final String imageUrl;
   final String? hotelName;
   final String? location;
-  double? height;
-  double? width;
+  final double? height;
+  final double? width;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Stack(
         children: [
           (Container(
@@ -25,7 +32,7 @@ class ImageWithTextCard extends StatelessWidget {
             margin: const EdgeInsets.all(8.0),
             child: Center(
               child: CachedNetworkImage(
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 imageUrl: imageUrl,
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),

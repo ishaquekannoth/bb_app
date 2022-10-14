@@ -1,4 +1,5 @@
 import 'package:bb_app/utils/image_constants.dart';
+import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,9 +30,10 @@ class HomeScreen extends StatelessWidget {
               autoPlay: true,
               enlargeMainPage: true,
               viewportFraction: 0.5,
-               height: size.height * 0.2,
+              height: size.height * 0.2,
               items: imageList.map((url) {
                 return ImageWithTextCard(
+                  onTap: () => Navigator.of(context).pushNamed(Routes.singleHotelDetails),
                   imageUrl: url,
                   // Uri.parse(url).hasAbsolutePath ? NetworkImage(url) : null,
                   hotelName: "Hotel",
@@ -47,17 +49,20 @@ class HomeScreen extends StatelessWidget {
             shrinkWrap: true,
             itemCount: 10,
             itemBuilder: (context, index) {
-              return GFListTile(
-                  avatar: GFAvatar(
-                    backgroundImage: NetworkImage(bridalImage),
-                    size: GFSize.LARGE,
-                    shape: GFAvatarShape.square,
-                  ),
-                  titleText: 'Hotel Name',
-                  subTitleText: 'Simple Description',
-                  icon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite_border)));
+              return GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(Routes.singleHotelDetails),
+                child: GFListTile(
+                    avatar: GFAvatar(
+                      backgroundImage: NetworkImage(bridalImage),
+                      size: GFSize.LARGE,
+                      shape: GFAvatarShape.square,
+                    ),
+                    titleText: 'Hotel Name',
+                    subTitleText: 'Simple Description',
+                    icon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.favorite_border))),
+              );
             },
           )
         ],
