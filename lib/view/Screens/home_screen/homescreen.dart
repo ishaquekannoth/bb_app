@@ -1,5 +1,4 @@
 import 'package:bb_app/utils/dummy_hotels.dart';
-import 'package:bb_app/utils/image_constants.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
