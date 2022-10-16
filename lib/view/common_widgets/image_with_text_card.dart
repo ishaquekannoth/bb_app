@@ -1,3 +1,4 @@
+import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -6,16 +7,12 @@ class ImageWithTextCard extends StatelessWidget {
   const ImageWithTextCard({
     required this.onTap,
     Key? key,
-    required this.imageUrl,
-    this.hotelName,
-    this.location,
+    required this.hotel,
     this.height,
     this.width,
   }) : super(key: key);
 
-  final String imageUrl;
-  final String? hotelName;
-  final String? location;
+  final HotelModel hotel;
   final double? height;
   final double? width;
   final void Function() onTap;
@@ -33,7 +30,7 @@ class ImageWithTextCard extends StatelessWidget {
             child: Center(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: imageUrl,
+                imageUrl: hotel.imageUrl,
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
@@ -50,11 +47,11 @@ class ImageWithTextCard extends StatelessWidget {
           )),
           Positioned(
               bottom: 25,
-              left: 25,
+              left: 35,
               child: Column(
                 children: [
                   Text(
-                    hotelName ?? "Unavailable",
+                    hotel.hotelName,
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
@@ -63,7 +60,7 @@ class ImageWithTextCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    location ?? "Unavailable",
+                    hotel.hotelLocation,
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),

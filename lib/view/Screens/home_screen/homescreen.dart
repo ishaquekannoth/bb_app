@@ -1,6 +1,8 @@
+import 'package:bb_app/utils/dummy_hotels.dart';
 import 'package:bb_app/utils/image_constants.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
+import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +33,11 @@ class HomeScreen extends StatelessWidget {
               enlargeMainPage: true,
               viewportFraction: 0.5,
               height: size.height * 0.2,
-              items: imageList.map((url) {
+              items: dummyHotels.map((index) {
                 return ImageWithTextCard(
-                  onTap: () => Navigator.of(context).pushNamed(Routes.singleHotelDetails),
-                  imageUrl: url,
-                  // Uri.parse(url).hasAbsolutePath ? NetworkImage(url) : null,
-                  hotelName: "Hotel",
-                  location: "Location",
+                  hotel: index,
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(Routes.singleHotelDetails),
                 );
               }).toList()),
           const HeadingText(
@@ -47,21 +47,10 @@ class HomeScreen extends StatelessWidget {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 10,
+            itemCount: 5,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context).pushNamed(Routes.singleHotelDetails),
-                child: GFListTile(
-                    avatar: GFAvatar(
-                      backgroundImage: NetworkImage(bridalImage),
-                      size: GFSize.LARGE,
-                      shape: GFAvatarShape.square,
-                    ),
-                    titleText: 'Hotel Name',
-                    subTitleText: 'Simple Description',
-                    icon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border))),
+              return HotelCard(
+                hotel: dummyHotels[index],
               );
             },
           )
