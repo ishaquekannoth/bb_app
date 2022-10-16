@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           Routes.signIn: (context) => const SignIn(),
           Routes.otpRequestScreen: (context) => const OTPrequestScreen(),
           Routes.otpModalScreen: (context) => const OTPmodalWidget(),
-          Routes.searchScreen: (context) => const SearchScreen(),
+          Routes.searchScreen: (context) => const MyBookings(),
           Routes.favourites: (context) => const FavouritesScreen(),
           Routes.profile: (context) => const ProfileScreen(),
           Routes.signUp: (context) => const SignUpScreen(),

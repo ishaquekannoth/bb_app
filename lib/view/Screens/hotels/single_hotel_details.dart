@@ -1,17 +1,19 @@
-
-
+import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/image_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:provider/provider.dart';
 
 class SingleHotelDetailsScreen extends StatelessWidget {
   const SingleHotelDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
+  
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -29,7 +31,6 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                       height: size.height * 0.25,
                       items: imageList.map((url) {
                         return Container(
-                           
                             margin: const EdgeInsets.all(8.0),
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
@@ -51,9 +52,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      const Text(
-                        "Hotel Name",
-                        style: TextStyle(
+                      Text(
+                        hotel.hotelName,
+                        style: const TextStyle(
                             color: KColors.kBlackColor,
                             fontSize: 28.0,
                             fontWeight: FontWeight.bold),
@@ -77,7 +78,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           Icons.favorite_border,
                           color: Colors.purple,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                         // hotelData.toggleFavourite();
+                        },
                       )
                     ],
                   ),

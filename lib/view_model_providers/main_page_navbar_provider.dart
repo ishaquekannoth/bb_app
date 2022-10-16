@@ -8,7 +8,7 @@ class MainPageViewModel extends ChangeNotifier {
   int selectedIndex = 0;
   List<Widget> pages = [
     const HomeScreen(),
-    // const SearchScreen(),
+    const MyBookings(),
     const FavouritesScreen(),
     const ProfileScreen()
   ];

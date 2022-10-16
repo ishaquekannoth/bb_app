@@ -3,6 +3,7 @@ import 'package:bb_app/utils/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:provider/provider.dart';
 
 class HotelCard extends StatelessWidget {
   const HotelCard({
@@ -14,8 +15,10 @@ class HotelCard extends StatelessWidget {
   final void Function()? favourite;
   @override
   Widget build(BuildContext context) {
+  
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.singleHotelDetails),
+      onTap: () => Navigator.of(context)
+          .pushNamed(Routes.singleHotelDetails, arguments: hotel),
       child: GFListTile(
           avatar: ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -32,6 +35,8 @@ class HotelCard extends StatelessWidget {
           ),
           titleText: hotel.hotelName,
           subTitleText: hotel.hotelLocation,
+          description:
+              Text(hotel.isBooked == false ? "Available" : "Unavailable"),
           icon: IconButton(
               onPressed: favourite, icon: const Icon(Icons.favorite_border))),
     );

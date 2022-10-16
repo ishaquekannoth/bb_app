@@ -1,16 +1,23 @@
 import 'package:flutter/cupertino.dart';
 
-class HotelModel extends ChangeNotifier{
-  String hotelId;
-  String hotelName;
-  String imageUrl;
-  String hotelLocation;
+class HotelModel extends ChangeNotifier {
+  final String hotelId;
+  final String hotelName;
+  final String imageUrl;
+  final String hotelLocation;
   bool? isBooked;
-  HotelModel({
-    required this.hotelId,
-    required this.hotelName,
-    required this.hotelLocation,
-    required this.imageUrl,
-    this.isBooked
-  });
+  bool? isFavourite;
+
+  HotelModel(
+      {required this.hotelId,
+      required this.hotelName,
+      required this.hotelLocation,
+      required this.imageUrl,
+      this.isFavourite = false,
+      this.isBooked});
+
+  toggleFavourite() {
+    isFavourite = !isFavourite!;
+    notifyListeners();
+  }
 }

@@ -25,11 +25,11 @@ class MainDisplayer extends StatelessWidget {
                   size: 25,
                   color: Color(0xff4A235A),
                 ),
-                // Icon(
-                //   Icons.search,
-                //   size: 25,
-                //   color: Color(0xff4A235A),
-                // ),
+                Icon(
+                  Icons.notes,
+                  size: 25,
+                  color: Color(0xff4A235A),
+                ),
                 Icon(
                   Icons.favorite,
                   size: 25,
