@@ -6,7 +6,7 @@ class OTPrequestResponseModel {
 
   factory OTPrequestResponseModel.fromJson(Map<String, dynamic> json) {
     return OTPrequestResponseModel(
-      isSuccess: json['created']??false,
+      isSuccess: json['success']??false,
       message: json['message']??"",
       hashKey: json['hash']??"invalid"
     );

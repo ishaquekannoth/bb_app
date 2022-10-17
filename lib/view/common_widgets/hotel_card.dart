@@ -1,9 +1,10 @@
+
+
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
-import 'package:provider/provider.dart';
 
 class HotelCard extends StatelessWidget {
   const HotelCard({
@@ -26,17 +27,17 @@ class HotelCard extends StatelessWidget {
               height: 100,
               width: 100,
               fit: BoxFit.cover,
-              imageUrl: hotel.imageUrl,
+              imageUrl: hotel.images?.first.first.url??"https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
               placeholder: (context, url) =>
                   const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) =>
                   Image.asset("lib/assets/images/NoImage.png"),
             ),
           ),
-          titleText: hotel.hotelName,
-          subTitleText: hotel.hotelLocation,
+          titleText: hotel.property?.propertyName,
+          subTitleText: hotel.property?.city,
           description:
-              Text(hotel.isBooked == false ? "Available" : "Unavailable"),
+              Text(hotel.isBlocked == false ? "Available" : "Unavailable"),
           icon: IconButton(
               onPressed: favourite, icon: const Icon(Icons.favorite_border))),
     );

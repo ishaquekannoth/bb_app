@@ -30,7 +30,7 @@ class ImageWithTextCard extends StatelessWidget {
             child: Center(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: hotel.imageUrl,
+                imageUrl: hotel.images?.first.first.url??"https://assets.vogue.in/photos/5ce3f37b0c1a9010b7c795e6/2:3/w_1600,c_limit/Mehandi-artist-featured.jpg",
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
@@ -51,7 +51,7 @@ class ImageWithTextCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    hotel.hotelName,
+                    hotel.property?.propertyName??"No data",
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
@@ -60,7 +60,7 @@ class ImageWithTextCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    hotel.hotelLocation,
+                    hotel.property?.city??"No data",
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),

@@ -3,9 +3,11 @@ import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
+import 'package:bb_app/view_model_providers/hotel_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +15,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final hotelListProvider = Provider.of<HotelListViewModel>(context);
+    WidgetsBinding.instance.addPostFrameCallback((_)async =>hotelListProvider.fetchAllHotels()
+        );
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -32,11 +37,11 @@ class HomeScreen extends StatelessWidget {
               enlargeMainPage: true,
               viewportFraction: 0.5,
               height: size.height * 0.2,
-              items: dummyHotels.map((index) {
+              items: hotelListProvider.hotelList.map((singleHotel) {
                 return ImageWithTextCard(
-                  hotel: index,
+                  hotel: singleHotel,
                   onTap: () => Navigator.of(context)
-                      .pushNamed(Routes.singleHotelDetails),
+                      .pushNamed(Routes.singleHotelDetails, arguments: singleHotel),
                 );
               }).toList()),
           const HeadingText(
@@ -46,10 +51,10 @@ class HomeScreen extends StatelessWidget {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: 5,
+            itemCount: hotelListProvider.hotelList.length,
             itemBuilder: (context, index) {
               return HotelCard(
-                hotel: dummyHotels[index],
+                hotel: hotelListProvider.hotelList[index],
               );
             },
           )

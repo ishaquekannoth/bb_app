@@ -7,8 +7,9 @@ import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_request_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_up/sign_up_screen.dart';
-import 'package:bb_app/view/Screens/search/search_screen.dart';
+import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:bb_app/view/main_displayer_page/main_displayer_page.dart';
+import 'package:bb_app/view_model_providers/hotel_list.dart';
 import 'package:bb_app/view_model_providers/main_page_navbar_provider.dart';
 import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => OTPRequestResponseViewModel()),
         ChangeNotifierProvider(create: (context) => SignUpViewModel()),
+         ChangeNotifierProvider(create: (context) => HotelListViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,7 @@
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
-import 'package:bb_app/view/Screens/search/search_screen.dart';
+import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:flutter/cupertino.dart';
 
 class MainPageViewModel extends ChangeNotifier {

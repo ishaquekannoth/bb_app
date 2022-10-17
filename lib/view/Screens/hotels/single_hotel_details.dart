@@ -1,6 +1,6 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
-import 'package:bb_app/utils/image_constants.dart';
+import 'package:bb_app/view_model_providers/hotel_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
@@ -13,7 +13,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
-  
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -29,12 +29,12 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                       enlargeMainPage: true,
                       viewportFraction: 0.5,
                       height: size.height * 0.25,
-                      items: imageList.map((url) {
+                      items: hotel.images!.first.map((url) {
                         return Container(
                             margin: const EdgeInsets.all(8.0),
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: url,
+                              imageUrl: url.url.toString(),
                               placeholder: (context, url) => const Center(
                                   child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
@@ -53,7 +53,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        hotel.hotelName,
+                        hotel.property?.propertyName ?? "No Data",
                         style: const TextStyle(
                             color: KColors.kBlackColor,
                             fontSize: 28.0,
@@ -79,7 +79,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           color: Colors.purple,
                         ),
                         onPressed: () {
-                         // hotelData.toggleFavourite();
+                          // hotelData.toggleFavourite();
                         },
                       )
                     ],
@@ -121,32 +121,33 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const Text.rich(
+                                  Text.rich(
                                     TextSpan(children: [
-                                      WidgetSpan(
+                                      const WidgetSpan(
                                           child: Icon(
                                         Icons.location_on,
                                         size: 16.0,
                                         color: Colors.grey,
                                       )),
-                                      TextSpan(text: "8 km to centrum")
+                                      TextSpan(
+                                          text: "8 km ${hotel.property?.city}")
                                     ]),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.grey, fontSize: 12.0),
                                   )
                                 ],
                               ),
                             ),
                             Column(
-                              children: const <Widget>[
+                              children: <Widget>[
                                 Text(
-                                  "\u{20B9}  ${1500}",
-                                  style: TextStyle(
+                                  "\u{20B9} ${hotel.price}",
+                                  style: const TextStyle(
                                       color: Colors.purple,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
                                 ),
-                                Text(
+                                const Text(
                                   "per night",
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.black),
@@ -178,10 +179,10 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 14.0),
                         ),
                         const SizedBox(height: 10.0),
-                        const Text(
-                          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
+                        Text(
+                          hotel.property?.propertyDetails ?? '',
                           textAlign: TextAlign.justify,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.w300, fontSize: 14.0),
                         ),
                         const SizedBox(height: 10.0),
