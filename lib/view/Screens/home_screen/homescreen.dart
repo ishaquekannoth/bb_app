@@ -1,4 +1,3 @@
-import 'package:bb_app/utils/dummy_hotels.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
@@ -16,8 +15,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final hotelListProvider = Provider.of<HotelListViewModel>(context);
-    WidgetsBinding.instance.addPostFrameCallback((_)async =>hotelListProvider.fetchAllHotels()
-        );
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -37,13 +35,23 @@ class HomeScreen extends StatelessWidget {
               enlargeMainPage: true,
               viewportFraction: 0.5,
               height: size.height * 0.2,
-              items: hotelListProvider.hotelList.map((singleHotel) {
-                return ImageWithTextCard(
-                  hotel: singleHotel,
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(Routes.singleHotelDetails, arguments: singleHotel),
-                );
-              }).toList()),
+              items: hotelListProvider.hotelList.isEmpty
+                  ? hotelListProvider.dummyList.map((singleHotel) {
+                      return ImageWithTextCard(
+                        hotel: singleHotel,
+                        onTap: () => Navigator.of(context).pushNamed(
+                            Routes.singleHotelDetails,
+                            arguments: singleHotel),
+                      );
+                    }).toList()
+                  : hotelListProvider.hotelList.map((singleHotel) {
+                      return ImageWithTextCard(
+                        hotel: singleHotel,
+                        onTap: () => Navigator.of(context).pushNamed(
+                            Routes.singleHotelDetails,
+                            arguments: singleHotel),
+                      );
+                    }).toList()),
           const HeadingText(
             text: "Explore Everything Nearby",
             padding: EdgeInsets.only(left: 10, top: 20),
@@ -54,7 +62,9 @@ class HomeScreen extends StatelessWidget {
             itemCount: hotelListProvider.hotelList.length,
             itemBuilder: (context, index) {
               return HotelCard(
-                hotel: hotelListProvider.hotelList[index],
+                hotel: hotelListProvider.hotelList.isEmpty
+                    ? hotelListProvider.dummyList[index]
+                    : hotelListProvider.hotelList[index],
               );
             },
           )

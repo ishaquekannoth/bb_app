@@ -20,7 +20,7 @@ class ImageWithTextCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap:hotel.id==null?(){return;} :onTap,
       child: Stack(
         children: [
           (Container(

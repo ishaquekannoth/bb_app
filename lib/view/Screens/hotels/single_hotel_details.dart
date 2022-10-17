@@ -1,10 +1,8 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
-import 'package:bb_app/view_model_providers/hotel_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
-import 'package:provider/provider.dart';
 
 class SingleHotelDetailsScreen extends StatelessWidget {
   const SingleHotelDetailsScreen({super.key});

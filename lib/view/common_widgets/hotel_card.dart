@@ -1,5 +1,3 @@
-
-
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,10 +14,13 @@ class HotelCard extends StatelessWidget {
   final void Function()? favourite;
   @override
   Widget build(BuildContext context) {
-  
     return GestureDetector(
-      onTap: () => Navigator.of(context)
-          .pushNamed(Routes.singleHotelDetails, arguments: hotel),
+      onTap: () {
+        hotel.property!.propertyName == "No Data"
+            ? () {}
+            : Navigator.of(context)
+                .pushNamed(Routes.singleHotelDetails, arguments: hotel);
+      },
       child: GFListTile(
           avatar: ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -27,7 +28,8 @@ class HotelCard extends StatelessWidget {
               height: 100,
               width: 100,
               fit: BoxFit.cover,
-              imageUrl: hotel.images?.first.first.url??"https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
+              imageUrl: hotel.images?.first.first.url ??
+                  "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
               placeholder: (context, url) =>
                   const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) =>
