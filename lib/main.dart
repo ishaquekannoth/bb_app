@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => OTPRequestResponseViewModel()),
         ChangeNotifierProvider(create: (context) => SignUpViewModel()),
-         ChangeNotifierProvider(create: (context) => HotelListViewModel()),
+         ChangeNotifierProvider(create: (context) => HotelListViewModel(context)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -11,7 +11,6 @@ class SingleHotelDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
-
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -50,12 +49,15 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text(
-                        hotel.property?.propertyName ?? "No Data",
-                        style: const TextStyle(
-                            color: KColors.kBlackColor,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                        width: size.width*0.5,
+                        child: Text(
+                          hotel.property?.propertyName ?? "No Data",
+                          style: const TextStyle(
+                              color: KColors.kBlackColor,
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(

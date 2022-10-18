@@ -1,3 +1,4 @@
+import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
@@ -36,14 +37,12 @@ class HomeScreen extends StatelessWidget {
               viewportFraction: 0.5,
               height: size.height * 0.2,
               items: hotelListProvider.hotelList.isEmpty
-                  ? hotelListProvider.dummyList.map((singleHotel) {
-                      return ImageWithTextCard(
-                        hotel: singleHotel,
-                        onTap: () => Navigator.of(context).pushNamed(
-                            Routes.singleHotelDetails,
-                            arguments: singleHotel),
-                      );
-                    }).toList()
+                  ? [
+                     ImageWithTextCard(
+                        hotel: null,
+                        onTap: () => {},
+                      )
+                  ]
                   : hotelListProvider.hotelList.map((singleHotel) {
                       return ImageWithTextCard(
                         hotel: singleHotel,
@@ -59,12 +58,12 @@ class HomeScreen extends StatelessWidget {
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: hotelListProvider.hotelList.length,
+            itemCount:hotelListProvider.hotelList.isEmpty?1: hotelListProvider.hotelList.length,
             itemBuilder: (context, index) {
               return HotelCard(
-                hotel: hotelListProvider.hotelList.isEmpty
-                    ? hotelListProvider.dummyList[index]
-                    : hotelListProvider.hotelList[index],
+                hotel: hotelListProvider.hotelList.isNotEmpty
+                    ? hotelListProvider.hotelList[index]
+                    : null
               );
             },
           )

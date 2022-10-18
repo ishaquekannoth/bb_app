@@ -7,12 +7,12 @@ class ImageWithTextCard extends StatelessWidget {
   const ImageWithTextCard({
     required this.onTap,
     Key? key,
-    required this.hotel,
+     this.hotel,
     this.height,
     this.width,
   }) : super(key: key);
 
-  final HotelModel hotel;
+  final HotelModel? hotel;
   final double? height;
   final double? width;
   final void Function() onTap;
@@ -20,7 +20,7 @@ class ImageWithTextCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:hotel.id==null?(){return;} :onTap,
+      onTap:hotel==null?()=>{} :onTap,
       child: Stack(
         children: [
           (Container(
@@ -30,7 +30,7 @@ class ImageWithTextCard extends StatelessWidget {
             child: Center(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: hotel.images?.first.first.url??"https://assets.vogue.in/photos/5ce3f37b0c1a9010b7c795e6/2:3/w_1600,c_limit/Mehandi-artist-featured.jpg",
+                imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
@@ -51,7 +51,7 @@ class ImageWithTextCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    hotel.property?.propertyName??"No data",
+                  hotel==null?"Not Available":hotel!.property!.propertyName.toString(),
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
@@ -60,7 +60,7 @@ class ImageWithTextCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    hotel.property?.city??"No data",
+                  hotel==null?"Un Available":hotel!.property!.city.toString(),
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),

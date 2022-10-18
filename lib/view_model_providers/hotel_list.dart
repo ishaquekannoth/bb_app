@@ -4,22 +4,15 @@ import 'package:flutter/cupertino.dart';
 
 class HotelListViewModel extends ChangeNotifier {
   List<HotelModel> hotelList = [];
-  List<HotelModel> dummyList = [
-    HotelModel(
-        property: Property(propertyName: "No Data", city: "Not Available"),
-        isBlocked: false,
-        images: [
-          [Images(url: "")]
-        ])
-  ];
-  HotelListViewModel() {
-    fetchAllHotels();
+  HotelListViewModel(context) {
+    fetchAllHotels(context);
   }
-  fetchAllHotels() async {
-    final dataList = await HotelListRequest().getHotelList();
-
-    hotelList.clear();
-    hotelList.addAll(dataList);
-    notifyListeners();
+  fetchAllHotels(context) async {
+    final dataList = await HotelListRequest().getHotelList(context);
+    if (dataList != null) {
+      hotelList.clear();
+      hotelList.addAll(dataList);
+      notifyListeners();
+    }
   }
 }

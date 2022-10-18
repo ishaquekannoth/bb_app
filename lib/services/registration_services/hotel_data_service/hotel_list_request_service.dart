@@ -4,11 +4,11 @@ import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/services/connection_checker.dart';
 import 'package:bb_app/services/dio_services.dart';
 import 'package:bb_app/utils/Url.dart';
+import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
 import 'package:dio/dio.dart';
 
-
 class HotelListRequest {
-  Future<List<HotelModel>> getHotelList() async {
+  Future<List<HotelModel>?> getHotelList(context) async {
     final connectionOk = await isConnectionOk();
     if (connectionOk) {
       try {
@@ -22,45 +22,15 @@ class HotelListRequest {
         }
       } on DioError catch (e) {
         if (e.response?.statusCode == 500) {
-          return [
-            HotelModel(
-                property:
-                    Property(propertyName: "No Data", city: "Not Available"),
-                isBlocked: false,
-                images: [
-                  [Images(url: "")]
-                ])
-          ];
-        } else {
-          return [
-            HotelModel(
-                property:
-                    Property(propertyName: "No Data", city: "Not Available"),
-                isBlocked: false,
-                images: [
-                  [Images(url: "")]
-                ])
-          ];
+          return null;
         }
+        
       } on Exception catch (_) {
-        return [
-          HotelModel(
-              property:
-                  Property(propertyName: "No Data", city: "Not Available"),
-              isBlocked: false,
-              images: [
-                [Images(url: "")]
-              ])
-        ];
+        return null;
       }
     }
-    return [
-      HotelModel(
-          property: Property(propertyName: "No Data", city: "Not Available"),
-          isBlocked: false,
-          images: [
-            [Images(url: "")]
-          ])
-    ];
+    ShowMyPopUp.popUpMessenger(context,
+        message: "No Connection", type: PopUpType.toast);
+    return null;
   }
 }
