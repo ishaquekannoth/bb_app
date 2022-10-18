@@ -27,7 +27,7 @@ class ImageWithTextCard extends StatelessWidget {
             height: height,
             width: width,
             margin: const EdgeInsets.all(8.0),
-            child: Center(
+            child: FittedBox(
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
                 imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
@@ -37,7 +37,7 @@ class ImageWithTextCard extends StatelessWidget {
                     Image.asset("lib/assets/images/NoImage.png"),
               ),
             ),
-
+          
             // decoration: BoxDecoration(
             //     borderRadius: BorderRadius.circular(10),
             //     image: DecorationImage(

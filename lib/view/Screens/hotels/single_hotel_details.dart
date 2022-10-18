@@ -1,7 +1,9 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
+import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
 
 class SingleHotelDetailsScreen extends StatelessWidget {
@@ -50,7 +52,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       SizedBox(
-                        width: size.width*0.5,
+                        width: size.width * 0.5,
                         child: Text(
                           hotel.property?.propertyName ?? "No Data",
                           style: const TextStyle(
@@ -148,7 +150,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                       fontSize: 20.0),
                                 ),
                                 const Text(
-                                  "per night",
+                                  "per day",
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.black),
                                 )
@@ -157,6 +159,62 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 30.0),
+                        SizedBox(
+                            width: size.width * 0.5,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const HeadingText(
+                                  text: "Amenities available\n",
+                                  padding: EdgeInsets.zero,
+                                ),
+                                Row(
+                                  children: const [
+                                    FaIcon(
+                                      FontAwesomeIcons.wifi,
+                                      color: KColors.kThemePurple,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.squareParking,
+                                      color: KColors.kThemePurple,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.wheelchair,
+                                      color: KColors.kThemePurple,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    FaIcon(
+                                      FontAwesomeIcons.personSwimming,
+                                      color: KColors.kThemePurple,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Description".toUpperCase(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600, fontSize: 14.0),
+                        ),
+                        const SizedBox(height: 10.0),
+                        Text(
+                          hotel.property?.propertyDetails ?? '',
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14.0),
+                        ),
+                        const SizedBox(height: 10.0),
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -171,32 +229,6 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 30.0),
-                        Text(
-                          "Description".toUpperCase(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 14.0),
-                        ),
-                        const SizedBox(height: 10.0),
-                        Text(
-                          hotel.property?.propertyDetails ?? '',
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14.0),
-                        ),
-                        const SizedBox(height: 10.0),
-                        const Text(
-                          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14.0),
-                        ),
-                        const Text(
-                          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14.0),
                         ),
                       ],
                     ),

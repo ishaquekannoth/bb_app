@@ -9,7 +9,8 @@ import 'package:dio/dio.dart';
 
 class HotelListRequest {
   Future<List<HotelModel>?> getHotelList(context) async {
-    final connectionOk = await isConnectionOk();
+    var connectionOk = await isConnectionOk();
+  
     if (connectionOk) {
       try {
         final response = await DioService.getMethod(url: MyApiUrl.getRoom);
@@ -24,11 +25,11 @@ class HotelListRequest {
         if (e.response?.statusCode == 500) {
           return null;
         }
-        
       } on Exception catch (_) {
         return null;
       }
     }
+      
     ShowMyPopUp.popUpMessenger(context,
         message: "No Connection", type: PopUpType.toast);
     return null;

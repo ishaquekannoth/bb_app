@@ -16,7 +16,7 @@ class HotelCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
+        hotel==null?()=>{}:
         Navigator.of(context)
             .pushNamed(Routes.singleHotelDetails, arguments: hotel);
       },
@@ -44,7 +44,6 @@ class HotelCard extends StatelessWidget {
               ? "Name : Not Available"
               : hotel?.property?.propertyName,
           subTitleText: hotel == null ? "No Data" : hotel?.property?.city,
-          description: Text(hotel == null ? "Available" : "Unavailable"),
           icon: IconButton(
               onPressed: favourite, icon: const Icon(Icons.favorite_border))),
     );
