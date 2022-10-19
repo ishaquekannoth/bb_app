@@ -1,12 +1,12 @@
-import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
-import 'package:bb_app/view_model_providers/hotel_list.dart';
+import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,11 +38,11 @@ class HomeScreen extends StatelessWidget {
               height: size.height * 0.2,
               items: hotelListProvider.hotelList.isEmpty
                   ? [
-                     ImageWithTextCard(
+                      ImageWithTextCard(
                         hotel: null,
                         onTap: () => {},
                       )
-                  ]
+                    ]
                   : hotelListProvider.hotelList.map((singleHotel) {
                       return ImageWithTextCard(
                         hotel: singleHotel,
@@ -55,18 +55,27 @@ class HomeScreen extends StatelessWidget {
             text: "Explore Everything Nearby",
             padding: EdgeInsets.only(left: 10, top: 20),
           ),
-          ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount:hotelListProvider.hotelList.isEmpty?1: hotelListProvider.hotelList.length,
-            itemBuilder: (context, index) {
-              return HotelCard(
-                hotel: hotelListProvider.hotelList.isNotEmpty
-                    ? hotelListProvider.hotelList[index]
-                    : null
-              );
-            },
-          )
+          hotelListProvider.isConnectionOk == false||hotelListProvider.isConnectionOk == null
+              ? ElevatedButton(
+                  onPressed: () {
+                    hotelListProvider.fetchAllHotels(context);
+                  },
+                  child: InternetConnectionChecker().isActivelyChecking
+                      ? const CircularProgressIndicator()
+                      : const Text("Refresh"))
+              : ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: hotelListProvider.hotelList.isEmpty
+                      ? 1
+                      : hotelListProvider.hotelList.length,
+                  itemBuilder: (context, index) {
+                    return HotelCard(
+                        hotel: hotelListProvider.hotelList.isNotEmpty
+                            ? hotelListProvider.hotelList[index]
+                            : null);
+                  },
+                ),
         ],
       ),
     );

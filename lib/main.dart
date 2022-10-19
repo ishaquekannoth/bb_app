@@ -2,6 +2,7 @@ import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
 import 'package:bb_app/view/Screens/hotels/single_hotel_details.dart';
+import 'package:bb_app/view/Screens/make_order/order_summary.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_request_screen.dart';
@@ -9,11 +10,12 @@ import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_up/sign_up_screen.dart';
 import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:bb_app/view/main_displayer_page/main_displayer_page.dart';
-import 'package:bb_app/view_model_providers/hotel_list.dart';
+import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
 import 'package:bb_app/view_model_providers/main_page_navbar_provider.dart';
 import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:bb_app/view_model_providers/sign_up_view_model.dart';
+import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +35,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (context) => OTPRequestResponseViewModel()),
         ChangeNotifierProvider(create: (context) => SignUpViewModel()),
-         ChangeNotifierProvider(create: (context) => HotelListViewModel(context)),
+        ChangeNotifierProvider(
+            create: (context) => HotelListViewModel(context)),
+            ChangeNotifierProvider(
+            create: (context) => SingleHotelViewModel()),
+            
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,7 +60,8 @@ class MyApp extends StatelessWidget {
           Routes.profile: (context) => const ProfileScreen(),
           Routes.signUp: (context) => const SignUpScreen(),
           Routes.singleHotelDetails: (context) =>
-              const SingleHotelDetailsScreen()
+              const SingleHotelDetailsScreen(),
+          Routes.orderSummaryScreen: (context) => const OrderSummaryScreen(),
         },
       ),
     );

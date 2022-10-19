@@ -23,27 +23,15 @@ class ImageWithTextCard extends StatelessWidget {
       onTap:hotel==null?()=>{} :onTap,
       child: Stack(
         children: [
-          (Container(
-            height: height,
-            width: width,
-            margin: const EdgeInsets.all(8.0),
-            child: FittedBox(
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) =>
-                    Image.asset("lib/assets/images/NoImage.png"),
-              ),
+          (FittedBox(
+            child: CachedNetworkImage(
+              fit: BoxFit.contain,
+              imageUrl:hotel==null?"https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg": hotel!.images!.first.first.url.toString(),
+              placeholder: (context, url) =>
+                  const CircularProgressIndicator(),
+              errorWidget: (context, url, error) =>
+                  Image.asset("lib/assets/images/NoImage.png"),
             ),
-          
-            // decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(10),
-            //     image: DecorationImage(
-            //         image: image ??
-            //             Image.asset("lib/assets/images/NoImage.png").image,
-            //         fit: BoxFit.cover)),
           )),
           Positioned(
               bottom: 25,
@@ -51,7 +39,7 @@ class ImageWithTextCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                  hotel==null?"Not Available":hotel!.property!.propertyName.toString(),
+                  hotel==null?"No Data":hotel!.property!.propertyName.toString(),
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
@@ -60,7 +48,7 @@ class ImageWithTextCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                  hotel==null?"Un Available":hotel!.property!.city.toString(),
+                  hotel==null?"Available":hotel!.property!.city.toString(),
                     style: const TextStyle(
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),

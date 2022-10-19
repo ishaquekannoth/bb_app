@@ -22,7 +22,7 @@ class HotelCard extends StatelessWidget {
       },
       child: GFListTile(
           avatar: SizedBox(
-            height: 100,
+           height: 100,
             width: 100,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),

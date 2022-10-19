@@ -1,10 +1,14 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
+import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
+import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class SingleHotelDetailsScreen extends StatelessWidget {
   const SingleHotelDetailsScreen({super.key});
@@ -13,10 +17,11 @@ class SingleHotelDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
+    final pageController = Provider.of<SingleHotelViewModel>(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(
-          children: <Widget>[
+          children: [
             Container(
                 padding: const EdgeInsets.only(top: 20),
                 //  foregroundDecoration:
@@ -92,37 +97,13 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
+                      children: [
                         Row(
-                          children: <Widget>[
+                          children: [
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    children: const <Widget>[
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.purple,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.purple,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.purple,
-                                      ),
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.purple,
-                                      ),
-                                      Icon(
-                                        Icons.star_border,
-                                        color: Colors.purple,
-                                      ),
-                                    ],
-                                  ),
+                                children: [
                                   Text.rich(
                                     TextSpan(children: [
                                       const WidgetSpan(
@@ -141,7 +122,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             Column(
-                              children: <Widget>[
+                              children: [
                                 Text(
                                   "\u{20B9} ${hotel.price}",
                                   style: const TextStyle(
@@ -153,9 +134,25 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                   "per day",
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.black),
-                                )
+                                ),
                               ],
                             )
+                          ],
+                        ),
+                        const SizedBox(height: 30.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            HeadingText(
+                                width: 100,
+                                text: "Check in ${hotel.checkinTime}",
+                                padding: EdgeInsets.zero,
+                                margin: EdgeInsets.zero),
+                            HeadingText(
+                                width: 100,
+                                text: "Check Out ${hotel.checkoutTime}",
+                                padding: EdgeInsets.zero,
+                                margin: EdgeInsets.zero)
                           ],
                         ),
                         const SizedBox(height: 30.0),
@@ -202,6 +199,56 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
+                        Card(
+                          shape: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    HeadingText(
+                                      margin: EdgeInsets.zero,
+                                      width: size.width * 0.3,
+                                      text: "Check in Date:",
+                                      padding: const EdgeInsets.only(left: 10),
+                                    ),
+                                    TextButton(
+                                        onPressed: () {
+                                          pageController
+                                              .onDateSelector(context);
+                                        },
+                                        child:   Text(DateFormat('dd / MM / yy').format(pageController.pickedDate!.start)))
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    HeadingText(
+                                      margin: EdgeInsets.zero,
+                                      width: size.width * 0.3,
+                                      text: "Check out Date:",
+                                      padding: const EdgeInsets.only(left: 10),
+                                    ),
+                                    TextButton(
+                                        onPressed: () {
+                                           pageController
+                                              .onDateSelector(context);
+                                        },
+                                        child:  Text(DateFormat('dd / MM / yy').format(pageController.pickedDate!.end)))
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           "Description".toUpperCase(),
                           style: const TextStyle(
@@ -223,7 +270,11 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20)),
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 32)),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                  Routes.orderSummaryScreen,
+                                  arguments: hotel);
+                            },
                             child: const Text(
                               "Book Now",
                               style: TextStyle(fontWeight: FontWeight.bold),

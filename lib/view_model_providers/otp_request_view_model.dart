@@ -4,6 +4,7 @@ import 'package:bb_app/model/otp/otp_verification_request_model.dart';
 import 'package:bb_app/model/otp/otp_verification_response_model.dart';
 import 'package:bb_app/services/registration_services/otp_request_verify_service.dart';
 import 'package:bb_app/utils/routes.dart';
+import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_modal_sheet.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,7 @@ class OTPRequestResponseViewModel extends ChangeNotifier {
         hashForOtp = otpRequestResponse.hashKey.toString();
         // Navigator.of(context)
         //     .pushNamed(Routes.otpModalScreen);
-        popUpModalSheet(context);
+        popUpModalSheet(context, const OTPmodalWidget());
       } else {
         ShowMyPopUp.popUpMessenger(context,
             type: PopUpType.snackBar,

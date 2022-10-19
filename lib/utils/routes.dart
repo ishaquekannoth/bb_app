@@ -12,5 +12,6 @@ class Routes {
   static const payments = '/payments';
   static const orderHistory = '/history';
   static const singleHotelDetails = '/singleHotelDetails';
+   static const orderSummaryScreen = '/orderSummaryScreen';
 
 }

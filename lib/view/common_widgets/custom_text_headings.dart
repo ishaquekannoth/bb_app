@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class HeadingText extends StatelessWidget {
   const HeadingText({
     required this.text,
+    this.width,
     this.style = const TextStyle(fontWeight: FontWeight.w600),
     this.fontWeight = FontWeight.w600,
     this.padding = const EdgeInsets.only(left: 10, top: 0, bottom: 0, right: 0),
@@ -14,11 +15,12 @@ class HeadingText extends StatelessWidget {
   final FontWeight? fontWeight;
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: width??MediaQuery.of(context).size.width,
       padding: padding,
       margin: margin,
       child: Text(
