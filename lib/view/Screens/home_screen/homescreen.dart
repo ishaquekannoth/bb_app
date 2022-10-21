@@ -6,6 +6,7 @@ import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
@@ -59,23 +60,28 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Text(
-                "Explore Everything Nearby",
+                "Explore Hotels",
                 style: TextStyle(
                     color: KColors.kBlackColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 14),
               ),
-              DropdownButton<SortType>(
+              DropdownButton<PriceSortType>(
+                hint: const Text("Price"),
                 isDense: true,
                 alignment: AlignmentDirectional.center,
-                icon: const Icon(Icons.sort),
+                icon:  FaIcon(
+                  hotelListProvider.priceSortType==PriceSortType.lowToHigh?FontAwesomeIcons.sortDown:hotelListProvider.priceSortType==PriceSortType.highToLow?FontAwesomeIcons.sortUp:FontAwesomeIcons.question,
+                  size: 15,
+                  color: KColors.kThemePurple,
+                ),
                 elevation: 10,
                 itemHeight: kMinInteractiveDimension,
                 items: const [
                   DropdownMenuItem(
-                    value: SortType.lowToHigh,
+                    value: PriceSortType.lowToHigh,
                     child: Text(
-                      "Price: Low to high",
+                      "Price: Low  ",
                       style: TextStyle(
                           color: KColors.kBlackColor,
                           fontWeight: FontWeight.bold,
@@ -83,9 +89,35 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   DropdownMenuItem(
-                    value: SortType.highToLow,
+                    value: PriceSortType.highToLow,
                     child: Text(
-                      "Price: High to low",
+                      "Price: High ",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                ],
+                onChanged: (value) => hotelListProvider.priceSort(value!),
+                value: hotelListProvider.priceSortType,
+              ),
+              DropdownButton<HotelSortType>(
+                hint: const Text("Filter Type "),
+                isDense: true,
+                alignment: AlignmentDirectional.center,
+               icon:  FaIcon(
+                  hotelListProvider.hotelSortType==HotelSortType.sortByHotels?FontAwesomeIcons.bed:hotelListProvider.hotelSortType==HotelSortType.sortByResort?FontAwesomeIcons.umbrellaBeach:hotelListProvider.hotelSortType==HotelSortType.sortByhomeStay?FontAwesomeIcons.house:FontAwesomeIcons.question,
+                  size: 15,
+                  color: KColors.kThemePurple,
+                ),
+                elevation: 10,
+                itemHeight: kMinInteractiveDimension,
+                items: const [
+                  DropdownMenuItem(
+                    value: HotelSortType.sortByHotels,
+                    child: Text(
+                      "Hotels",
                       style: TextStyle(
                           color: KColors.kBlackColor,
                           fontWeight: FontWeight.bold,
@@ -93,17 +125,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   DropdownMenuItem(
-                    value: SortType.sortByHotels,
-                    child: Text(
-                      "Hotels Only",
-                      style: TextStyle(
-                          color: KColors.kBlackColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
-                    ),
-                  ),
-                   DropdownMenuItem(
-                    value: SortType.sortByResort,
+                    value: HotelSortType.sortByResort,
                     child: Text(
                       "Resorts",
                       style: TextStyle(
@@ -113,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   DropdownMenuItem(
-                    value: SortType.sortByhomeStay,
+                    value: HotelSortType.sortByhomeStay,
                     child: Text(
                       "Home Stay",
                       style: TextStyle(
@@ -124,8 +146,8 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
                 onChanged: (value) =>
-                    hotelListProvider.sortHotelTypeSetter(value!, context),
-                value: hotelListProvider.sortType,
+                    hotelListProvider.hotelTypesort(value!, context),
+                value: hotelListProvider.hotelSortType,
               ),
             ],
           ),

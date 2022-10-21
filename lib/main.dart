@@ -1,7 +1,7 @@
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
-import 'package:bb_app/view/Screens/hotels/single_hotel_details.dart';
+import 'package:bb_app/view/Screens/hotels/single_hotel_details_screen.dart';
 import 'package:bb_app/view/Screens/make_order/order_summary.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';

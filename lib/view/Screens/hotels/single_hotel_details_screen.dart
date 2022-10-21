@@ -105,23 +105,6 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text.rich(
-                                    TextSpan(children: [
-                                      const WidgetSpan(
-                                          child: Icon(
-                                        Icons.location_on,
-                                        size: 16.0,
-                                        color: Colors.grey,
-                                      )),
-                                      TextSpan(
-                                          text:
-                                              "Type : ${hotel.category?.category}",
-                                          style: const TextStyle(
-                                              color: Colors.black)),
-                                    ]),
-                                    style: const TextStyle(
-                                        color: Colors.grey, fontSize: 12.0),
-                                  ),
                                   SizedBox(
                                       width: size.width * 0.3,
                                       child: Row(
@@ -134,8 +117,13 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                           const SizedBox(
                                             width: 4,
                                           ),
-                                          Text(hotel.property!.phoneNumber
-                                              .toString()),
+                                          Text(
+                                            " ${hotel.property!.phoneNumber}",
+                                            style: const TextStyle(
+                                                fontWeight:
+                                                    FontWeight.bold),
+                                          ),
+                                        
                                         ],
                                       ))
                                 ],
@@ -165,12 +153,12 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           children: [
                             HeadingText(
                                 width: 80,
-                                text: "Check in ${hotel.checkinTime}",
+                                text: "Check in\n ${hotel.checkinTime}",
                                 padding: EdgeInsets.zero,
                                 margin: EdgeInsets.zero),
                             HeadingText(
                                 width: 100,
-                                text: "Check Out ${hotel.checkoutTime}",
+                                text: "Check Out\n${hotel.checkoutTime}",
                                 padding: EdgeInsets.zero,
                                 margin: EdgeInsets.zero),
                             const HeadingText(

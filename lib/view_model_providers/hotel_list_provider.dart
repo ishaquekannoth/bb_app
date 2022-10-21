@@ -3,21 +3,20 @@ import 'package:bb_app/services/hotel_data_service/hotel_list_request_service.da
 import 'package:flutter/cupertino.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-enum SortType {
+enum HotelSortType { sortByHotels, sortByResort, sortByhomeStay }
+
+enum PriceSortType {
   lowToHigh,
   highToLow,
-  sortByHotels,
-  sortByResort,
-  sortByhomeStay
 }
 
 class HotelListViewModel extends ChangeNotifier {
-  SortType? sortType;
+  HotelSortType? hotelSortType;
+  PriceSortType? priceSortType;
   List<HotelModel> hotelList = [];
   List<HotelModel> mainList = [];
   bool? isConnectionOk;
   HotelListViewModel(context) {
-    sortType = SortType.lowToHigh;
     fetchAllHotels(context);
   }
   fetchAllHotels(context) async {
@@ -32,23 +31,25 @@ class HotelListViewModel extends ChangeNotifier {
     }
   }
 
-  void sortHotelTypeSetter(SortType type, context) {
+  void priceSort(PriceSortType type) {
+    priceSortType = type;
+    if (hotelList.isNotEmpty) {
+      if (type == PriceSortType.lowToHigh) {
+        hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
+      } else {
+        hotelList.sort((a, b) => b.price!.compareTo(a.price as int));
+      }
+      notifyListeners();
+    }
+  }
+
+  void hotelTypesort(HotelSortType type, context) {
     hotelList.clear();
     hotelList.addAll(mainList);
-    sortType = type;
+    hotelSortType = type;
     if (hotelList.isNotEmpty) {
-      switch (sortType) {
-        case SortType.lowToHigh:
-          {
-            hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
-          }
-          break;
-        case SortType.highToLow:
-          {
-            hotelList.sort((a, b) => b.price!.compareTo(a.price as int));
-          }
-          break;
-        case SortType.sortByHotels:
+      switch (hotelSortType) {
+        case HotelSortType.sortByHotels:
           {
             hotelList.clear();
             for (var element in mainList) {
@@ -58,7 +59,7 @@ class HotelListViewModel extends ChangeNotifier {
             }
           }
           break;
-        case SortType.sortByResort:
+        case HotelSortType.sortByResort:
           {
             hotelList.clear();
             for (var element in mainList) {
@@ -68,7 +69,7 @@ class HotelListViewModel extends ChangeNotifier {
             }
           }
           break;
-          case SortType.sortByhomeStay:
+        case HotelSortType.sortByhomeStay:
           {
             hotelList.clear();
             for (var element in mainList) {
@@ -80,11 +81,11 @@ class HotelListViewModel extends ChangeNotifier {
           break;
         default:
           {
-             hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
+            hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
           }
       }
     }
-
+    priceSort(PriceSortType.lowToHigh);
     notifyListeners();
   }
 }
