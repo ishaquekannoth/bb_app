@@ -17,11 +17,6 @@ class HotelListViewModel extends ChangeNotifier {
     isConnectionOk = await InternetConnectionChecker().hasConnection;
     final dataList = await HotelListRequest().getHotelList(context);
     if (dataList != null) {
-      sortType == SortType.lowToHigh
-          ? dataList.sort((a, b) => a.price!.compareTo(b.price as int))
-          : sortType == SortType.highToLow
-              ? dataList.sort((a, b) => b.price!.compareTo(a.price as int))
-              : dataList.sort((a, b) => a.price!.compareTo(b.price as int));
       hotelList.clear();
       hotelList.addAll(dataList);
       notifyListeners();
@@ -29,9 +24,14 @@ class HotelListViewModel extends ChangeNotifier {
   }
 
   sortHotelTypeSetter(SortType type, context) {
-    if (sortType != type) {
+    if (sortType != type&&hotelList.isNotEmpty) {
       sortType = type;
-      fetchAllHotels(context);
+      type == SortType.lowToHigh
+          ? hotelList.sort((a, b) => a.price!.compareTo(b.price as int))
+          : sortType == SortType.highToLow
+              ? hotelList.sort((a, b) => b.price!.compareTo(a.price as int))
+              : hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
     }
+    notifyListeners();
   }
 }
