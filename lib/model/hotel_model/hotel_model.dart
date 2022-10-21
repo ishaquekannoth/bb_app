@@ -76,26 +76,26 @@ class HotelModel {
     int? v;
 
     factory HotelModel.fromJson(Map<String, dynamic> json) => HotelModel(
-        id: json["_id"],
+        id: json["_id"]??"No Data",
         property: Property.fromJson(json["property"]),
         category: Category.fromJson(json["category"]),
-        vendor: json["vendor"],
+        vendor: json["vendor"]??"No Data",
         amenities: List<dynamic>.from(json["amenities"].map((x) => x)),
-        roomName: json["room_name"],
-        roomType: json["room_type"],
-        quantity: json["quantity"],
-        view: json["view"],
-        isBlocked: json["isBlocked"],
-        bathroom: json["bathroom"],
-        price: json["price"],
-        guest: json["guest"],
-        noOfBed: json["no_of_bed"],
-        checkinTime: json["checkin_time"],
-        checkoutTime: json["checkout_time"],
+        roomName: json["room_name"]??"No Data",
+        roomType: json["room_type"]??"No Data",
+        quantity: json["quantity"]??"No Data",
+        view: json["view"]??"No Data",
+        isBlocked: json["isBlocked"]??"No Data",
+        bathroom: json["bathroom"]??"No Data",
+        price: json["price"]??"0",
+        guest: json["guest"]??"No Data",
+        noOfBed: json["no_of_bed"]??"No Data",
+        checkinTime: json["checkin_time"]??"12 AM",
+        checkoutTime: json["checkout_time"]??"11 AM",
         images: List<List<Images>>.from(json["images"].map((x) => List<Images>.from(x.map((x) => Images.fromJson(x))))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
+        v: json["__v"]??"No Data",
     );
 
 }
@@ -120,9 +120,9 @@ class Category {
     int? v;
 
     factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["_id"],
-        category: json["category"],
-        description: json["description"],
+        id: json["_id"]??"No Data",
+        category: json["category"]??"No Data",
+        description: json["description"]??"No Data",
         subCategory: List<dynamic>.from(json["sub_category"].map((x) => x)),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -186,23 +186,23 @@ class Property {
     String? street;
 
     factory Property.fromJson(Map<String, dynamic> json) => Property(
-        id: json["_id"],
-        propertyName: json["property_name"],
-        phoneNumber: json["phone_number"],
-        propertyDetails: json["property_details"],
-        email: json["email"],
-        category: json["category"],
-        vendor: json["vendor"],
+        id: json["_id"]??"No Data",
+        propertyName: json["property_name"]??"No Data",
+        phoneNumber: json["phone_number"]??"No Data",
+        propertyDetails: json["property_details"]??"No Data",
+        email: json["email"]??"No Data",
+        category: json["category"]??"No Data",
+        vendor: json["vendor"]??"No Data",
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-        address: json["address"],
-        city: json["city"],
-        country: json["country"],
-        landmark: json["landmark"],
-        pincode: json["pincode"],
-        state: json["state"],
-        street: json["street"],
+        address: json["address"]??"No Data",
+        city: json["city"]??"No Data",
+        country: json["country"]??"No Data",
+        landmark: json["landmark"]??"No Data",
+        pincode: json["pincode"]??"No Data",
+        state: json["state"]??"No Data",
+        street: json["street"]??"No Data",
     );
 
 }

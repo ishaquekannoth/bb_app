@@ -59,7 +59,8 @@ class HotelCard extends StatelessWidget {
                 Text(
                   hotel != null ? hotel!.price.toString() : "0",
                   style: const TextStyle(fontWeight: FontWeight.bold),
-                )
+                ),
+                Text("${hotel!.category!.category}")
               ],
             )),
       ),

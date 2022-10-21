@@ -93,9 +93,29 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   DropdownMenuItem(
-                    value: SortType.sortByVicinity,
+                    value: SortType.sortByHotels,
                     child: Text(
-                      "Vicinity",
+                      "Hotels Only",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                   DropdownMenuItem(
+                    value: SortType.sortByResort,
+                    child: Text(
+                      "Resorts",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: SortType.sortByhomeStay,
+                    child: Text(
+                      "Home Stay",
                       style: TextStyle(
                           color: KColors.kBlackColor,
                           fontWeight: FontWeight.bold,

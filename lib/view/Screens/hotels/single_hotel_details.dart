@@ -1,5 +1,3 @@
-
-
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
@@ -116,11 +114,30 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                         color: Colors.grey,
                                       )),
                                       TextSpan(
-                                          text: "8 km ${hotel.property?.city}")
+                                          text:
+                                              "Type : ${hotel.category?.category}",
+                                          style: const TextStyle(
+                                              color: Colors.black)),
                                     ]),
                                     style: const TextStyle(
                                         color: Colors.grey, fontSize: 12.0),
-                                  )
+                                  ),
+                                  SizedBox(
+                                      width: size.width * 0.3,
+                                      child: Row(
+                                        children: [
+                                          const FaIcon(
+                                            FontAwesomeIcons.phone,
+                                            color: KColors.kThemePurple,
+                                            size: 12,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(hotel.property!.phoneNumber
+                                              .toString()),
+                                        ],
+                                      ))
                                 ],
                               ),
                             ),
@@ -144,10 +161,10 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 30.0),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             HeadingText(
-                                width: 100,
+                                width: 80,
                                 text: "Check in ${hotel.checkinTime}",
                                 padding: EdgeInsets.zero,
                                 margin: EdgeInsets.zero),
@@ -167,15 +184,33 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               items: const [
                                 DropdownMenuItem(
                                   value: 0,
-                                   child: Text("1",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                  child: Text(
+                                    "1",
+                                    style: TextStyle(
+                                        color: KColors.kBlackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
                                 ),
                                 DropdownMenuItem(
                                   value: 1,
-                                  child: Text("2",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                  child: Text(
+                                    "2",
+                                    style: TextStyle(
+                                        color: KColors.kBlackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
                                 ),
                                 DropdownMenuItem(
                                   value: 2,
-                                  child: Text("3",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                  child: Text(
+                                    "3",
+                                    style: TextStyle(
+                                        color: KColors.kBlackColor,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
                                 )
                               ],
                               onChanged: (value) =>
