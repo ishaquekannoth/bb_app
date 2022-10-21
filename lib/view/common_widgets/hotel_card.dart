@@ -1,8 +1,10 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/routes.dart';
+import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:provider/provider.dart';
 
 class HotelCard extends StatelessWidget {
   const HotelCard({
@@ -14,15 +16,18 @@ class HotelCard extends StatelessWidget {
   final void Function()? favourite;
   @override
   Widget build(BuildContext context) {
+    final pageController = Provider.of<SingleHotelViewModel>(context);
     return GestureDetector(
-      onTap: () {
-        hotel==null?()=>{}:
-        Navigator.of(context)
-            .pushNamed(Routes.singleHotelDetails, arguments: hotel);
-      },
+      onTap: hotel == null
+          ? () => {}
+          : () {
+              pageController.onInit();
+              Navigator.of(context)
+                  .pushNamed(Routes.singleHotelDetails, arguments: hotel);
+            },
       child: GFListTile(
           avatar: SizedBox(
-           height: 100,
+            height: 100,
             width: 100,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),

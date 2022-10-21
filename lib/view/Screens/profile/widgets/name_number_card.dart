@@ -1,7 +1,6 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/view/Screens/profile/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
-
 class NameNumberCard extends StatelessWidget {
   const NameNumberCard({
     Key? key,

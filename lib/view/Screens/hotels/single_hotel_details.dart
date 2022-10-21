@@ -1,3 +1,5 @@
+
+
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
@@ -18,6 +20,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
     final pageController = Provider.of<SingleHotelViewModel>(context);
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -152,7 +155,33 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                 width: 100,
                                 text: "Check Out ${hotel.checkoutTime}",
                                 padding: EdgeInsets.zero,
-                                margin: EdgeInsets.zero)
+                                margin: EdgeInsets.zero),
+                            const HeadingText(
+                                width: 100,
+                                text: "No of Guests",
+                                padding: EdgeInsets.zero,
+                                margin: EdgeInsets.zero),
+                            DropdownButton<int>(
+                              elevation: 10,
+                              itemHeight: kMinInteractiveDimension,
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 0,
+                                   child: Text("1",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                ),
+                                DropdownMenuItem(
+                                  value: 1,
+                                  child: Text("2",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                ),
+                                DropdownMenuItem(
+                                  value: 2,
+                                  child: Text("3",style: TextStyle(color: KColors.kBlackColor,fontWeight: FontWeight.bold,fontSize: 17),),
+                                )
+                              ],
+                              onChanged: (value) =>
+                                  pageController.onSelectGuests(value ?? 0),
+                              value: pageController.guests,
+                            ),
                           ],
                         ),
                         const SizedBox(height: 30.0),
@@ -221,7 +250,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                           pageController
                                               .onDateSelector(context);
                                         },
-                                        child:   Text(DateFormat('dd / MM / yy').format(pageController.pickedDate!.start)))
+                                        child: Text(DateFormat('dd / MM / yy')
+                                            .format(pageController
+                                                .pickedDate!.start)))
                                   ],
                                 ),
                                 Row(
@@ -236,10 +267,12 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () {
-                                           pageController
+                                          pageController
                                               .onDateSelector(context);
                                         },
-                                        child:  Text(DateFormat('dd / MM / yy').format(pageController.pickedDate!.end)))
+                                        child: Text(DateFormat('dd / MM / yy')
+                                            .format(pageController
+                                                .pickedDate!.end)))
                                   ],
                                 ),
                               ],

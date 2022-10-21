@@ -29,7 +29,7 @@ class SignupService {
         } else {
           return SignUpResponseModel(
               isSuccess: false,
-              message: "Server unreachable",
+              message: "Server Error or Invalid Phone",
               token: "Invalid");
         }
       } on SocketException catch (e) {

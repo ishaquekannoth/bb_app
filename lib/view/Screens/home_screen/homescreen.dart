@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
             text: "Explore Everything Nearby",
             padding: EdgeInsets.only(left: 10, top: 20),
           ),
-          hotelListProvider.isConnectionOk == false||hotelListProvider.isConnectionOk == null
+          hotelListProvider.isConnectionOk == false||hotelListProvider.isConnectionOk == null||hotelListProvider.hotelList.isEmpty
               ? ElevatedButton(
                   onPressed: () {
                     hotelListProvider.fetchAllHotels(context);
