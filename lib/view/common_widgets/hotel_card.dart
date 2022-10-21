@@ -25,32 +25,44 @@ class HotelCard extends StatelessWidget {
               Navigator.of(context)
                   .pushNamed(Routes.singleHotelDetails, arguments: hotel);
             },
-      child: GFListTile(
-          avatar: SizedBox(
-            height: 100,
-            width: 100,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: CachedNetworkImage(
-                height: 100,
-                width: 100,
-                fit: BoxFit.cover,
-                imageUrl: hotel == null
-                    ? ""
-                    : hotel!.images!.first.first.url.toString(),
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    Image.asset("lib/assets/images/NoImage.png"),
+      child: Card(
+        child: GFListTile(
+            avatar: SizedBox(
+              height: 100,
+              width: 100,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: CachedNetworkImage(
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                  imageUrl: hotel == null
+                      ? ""
+                      : hotel!.images!.first.first.url.toString(),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      Image.asset("lib/assets/images/NoImage.png"),
+                ),
               ),
             ),
-          ),
-          titleText: hotel == null
-              ? "Name : Not Available"
-              : hotel?.property?.propertyName,
-          subTitleText: hotel == null ? "No Data" : hotel?.property?.city,
-          icon: IconButton(
-              onPressed: favourite, icon: const Icon(Icons.favorite_border))),
+            titleText: hotel == null
+                ? "Name : Not Available"
+                : hotel?.property?.propertyName,
+            subTitleText: hotel == null ? "No Data" : hotel?.property?.city,
+            icon:
+                // IconButton(
+                //onPressed: favourite, icon: const Icon(Icons.favorite_border))
+                Column(
+              children: [
+                const Text("Price/night"),
+                Text(
+                  hotel != null ? hotel!.price.toString() : "0",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                )
+              ],
+            )),
+      ),
     );
   }
 }

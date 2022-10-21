@@ -1,3 +1,4 @@
+import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
@@ -51,11 +52,66 @@ class HomeScreen extends StatelessWidget {
                             arguments: singleHotel),
                       );
                     }).toList()),
-          const HeadingText(
-            text: "Explore Everything Nearby",
-            padding: EdgeInsets.only(left: 10, top: 20),
+          const SizedBox(
+            height: 20,
           ),
-          hotelListProvider.isConnectionOk == false||hotelListProvider.isConnectionOk == null||hotelListProvider.hotelList.isEmpty
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Text(
+                "Explore Everything Nearby",
+                style: TextStyle(
+                    color: KColors.kBlackColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14),
+              ),
+              DropdownButton<SortType>(
+                isDense: true,
+                alignment: AlignmentDirectional.center,
+                icon: const Icon(Icons.sort),
+                elevation: 10,
+                itemHeight: kMinInteractiveDimension,
+                items: const [
+                  DropdownMenuItem(
+                    value: SortType.lowToHigh,
+                    child: Text(
+                      "Price: Low to high",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: SortType.highToLow,
+                    child: Text(
+                      "Price: High to low",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: SortType.sortByVicinity,
+                    child: Text(
+                      "Vicinity",
+                      style: TextStyle(
+                          color: KColors.kBlackColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    ),
+                  )
+                ],
+                onChanged: (value) =>
+                    hotelListProvider.sortHotelTypeSetter(value!, context),
+                value: hotelListProvider.sortType,
+              ),
+            ],
+          ),
+          hotelListProvider.isConnectionOk == false ||
+                  hotelListProvider.isConnectionOk == null ||
+                  hotelListProvider.hotelList.isEmpty
               ? ElevatedButton(
                   onPressed: () {
                     hotelListProvider.fetchAllHotels(context);
