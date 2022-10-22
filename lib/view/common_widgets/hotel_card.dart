@@ -46,6 +46,7 @@ class HotelCard extends StatelessWidget {
                 ),
               ),
             ),
+          
             titleText: hotel == null
                 ? "Name : Not Available"
                 : hotel?.property?.propertyName,
@@ -58,7 +59,9 @@ class HotelCard extends StatelessWidget {
                 const Text("Price/night"),
                 Text(
                   hotel != null ? hotel!.price.toString() : "0",
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold,
+                  
+                  ),
                 ),
                 Text("${hotel!.category!.category}")
               ],

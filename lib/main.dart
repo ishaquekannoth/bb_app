@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'BookMe Up',
         theme: ThemeData(
+          
           fontFamily: GoogleFonts.montserrat().fontFamily,
           primarySwatch: Colors.deepPurple,
         ),

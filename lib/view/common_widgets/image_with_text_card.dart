@@ -41,6 +41,7 @@ class ImageWithTextCard extends StatelessWidget {
                   Text(
                   hotel==null?"No Data":hotel!.property!.propertyName.toString(),
                     style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
                   ),
@@ -50,6 +51,7 @@ class ImageWithTextCard extends StatelessWidget {
                   Text(
                   hotel==null?"Available":hotel!.property!.city.toString(),
                     style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
                         color: KColors.kWhiteColor,
                         fontWeight: FontWeight.bold),
                   ),

@@ -38,14 +38,14 @@ class HomeScreen extends StatelessWidget {
               enlargeMainPage: true,
               viewportFraction: 0.5,
               height: size.height * 0.2,
-              items: hotelListProvider.hotelList.isEmpty
+              items: hotelListProvider.mainList.isEmpty
                   ? [
                       ImageWithTextCard(
                         hotel: null,
                         onTap: () => {},
                       )
                     ]
-                  : hotelListProvider.hotelList.map((singleHotel) {
+                  : hotelListProvider.mainList.map((singleHotel) {
                       return ImageWithTextCard(
                         hotel: singleHotel,
                         onTap: () => Navigator.of(context).pushNamed(
