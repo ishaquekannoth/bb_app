@@ -1,7 +1,6 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/services/hotel_data_service/hotel_list_request_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 enum HotelSortType { sortByHotels, sortByResort, sortByhomeStay }
 
@@ -13,22 +12,22 @@ enum PriceSortType {
 class HotelListViewModel extends ChangeNotifier {
   HotelSortType? hotelSortType;
   PriceSortType? priceSortType;
+  bool isLoading = false;
   List<HotelModel> hotelList = [];
   List<HotelModel> mainList = [];
-  bool? isConnectionOk;
   HotelListViewModel(context) {
     fetchAllHotels(context);
   }
   fetchAllHotels(context) async {
-    isConnectionOk = await InternetConnectionChecker().hasConnection;
     final dataList = await HotelListRequest().getHotelList(context);
     if (dataList != null) {
       mainList.clear();
       mainList.addAll(dataList);
       hotelList.clear();
       hotelList.addAll(dataList);
-      notifyListeners();
     }
+    isLoading = false;
+    notifyListeners();
   }
 
   void priceSort(PriceSortType type) {
@@ -86,6 +85,11 @@ class HotelListViewModel extends ChangeNotifier {
       }
     }
     priceSort(PriceSortType.lowToHigh);
+    notifyListeners();
+  }
+
+  isloadingToggler() {
+    isLoading = !isLoading;
     notifyListeners();
   }
 }

@@ -10,6 +10,7 @@ import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_up/sign_up_screen.dart';
 import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:bb_app/view/main_displayer_page/main_displayer_page.dart';
+import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
 import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
 import 'package:bb_app/view_model_providers/main_page_navbar_provider.dart';
 import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
             create: (context) => HotelListViewModel(context)),
             ChangeNotifierProvider(
             create: (context) => SingleHotelViewModel()),
+            ChangeNotifierProvider(
+            create: (context) => GeoLocatorViewModel(context)),
             
       ],
       child: MaterialApp(

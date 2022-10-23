@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 class HotelListRequest {
   Future<List<HotelModel>?> getHotelList(context) async {
     var connectionOk = await isConnectionOk();
-  
+
     if (connectionOk) {
       try {
         final response = await DioService.getMethod(url: MyApiUrl.getRoom);
@@ -23,15 +23,22 @@ class HotelListRequest {
         }
       } on DioError catch (e) {
         if (e.response?.statusCode == 500) {
+          ShowMyPopUp.popUpMessenger(context,
+              message: "Server Unreachable", type: PopUpType.toast);
           return null;
         }
       } on Exception catch (_) {
+        print("Exception3");
         return null;
       }
+    } else {
+      ShowMyPopUp.popUpMessenger(context,
+          message: "No Connection", type: PopUpType.toast);
+      return null;
     }
-      
-    ShowMyPopUp.popUpMessenger(context,
-        message: "No Connection", type: PopUpType.toast);
-    return null;
+    
+      ShowMyPopUp.popUpMessenger(context,
+          message: "Server Unreachable", type: PopUpType.toast);
+      return null;
   }
 }
