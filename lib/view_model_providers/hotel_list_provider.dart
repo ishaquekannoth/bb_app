@@ -15,6 +15,7 @@ class HotelListViewModel extends ChangeNotifier {
   bool isLoading = false;
   List<HotelModel> hotelList = [];
   List<HotelModel> mainList = [];
+  
   HotelListViewModel(context) {
     fetchAllHotels(context);
   }
@@ -34,9 +35,9 @@ class HotelListViewModel extends ChangeNotifier {
     priceSortType = type;
     if (hotelList.isNotEmpty) {
       if (type == PriceSortType.lowToHigh) {
-        hotelList.sort((a, b) => a.price!.compareTo(b.price as int));
+        hotelList.sort((a, b) => a.price!.toDouble().compareTo(b.price!.toDouble()));
       } else {
-        hotelList.sort((a, b) => b.price!.compareTo(a.price as int));
+        hotelList.sort((a, b) => b.price!.toDouble().compareTo(a.price!.toDouble()));
       }
       notifyListeners();
     }
@@ -90,6 +91,14 @@ class HotelListViewModel extends ChangeNotifier {
 
   isloadingToggler() {
     isLoading = !isLoading;
+    notifyListeners();
+  }
+
+  onResetFilters() {
+    hotelSortType = null;
+    priceSortType = null;
+    hotelList.clear();
+    hotelList.addAll(mainList);
     notifyListeners();
   }
 }

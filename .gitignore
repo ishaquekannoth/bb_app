@@ -31,6 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/lib/utils/payment_data.dart
+/razorpay-flutter-master.zip
 
 # Symbolication related
 app.*.symbols
@@ -42,4 +44,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/lib/utils/payment_data.dart
+

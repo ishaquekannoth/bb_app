@@ -52,11 +52,11 @@ class SingleHotelDetailsScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   SizedBox(height: size.height * .3),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
+                    children: [
                       SizedBox(
                         width: size.width * 0.5,
                         child: Text(
@@ -73,7 +73,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           horizontal: 16.0,
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.purple,
                             borderRadius: BorderRadius.circular(20.0)),
                         child: const Text(
                           "8.4/85 reviews",
@@ -106,7 +106,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                      width: size.width * 0.3,
+                                      width: size.width * 0.7,
                                       child: Row(
                                         children: [
                                           const FaIcon(
@@ -120,11 +120,16 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                           Text(
                                             " ${hotel.property!.phoneNumber}",
                                             style: const TextStyle(
-                                                fontWeight:
-                                                    FontWeight.bold),
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                        
                                         ],
+                                      )),
+                                  SizedBox(
+                                      width: size.width * 0.5,
+                                      child: Text(
+                                        "${hotel.property?.address}",
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ))
                                 ],
                               ),
@@ -148,6 +153,48 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         const SizedBox(height: 30.0),
+                        SizedBox(
+                            child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const HeadingText(
+                              text: "Amenities available\n",
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
+                            ),
+                            Container(
+                              height: size.height * 0.1,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.black)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: const [
+                                  FaIcon(
+                                    FontAwesomeIcons.wifi,
+                                    color: KColors.kThemePurple,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.squareParking,
+                                    color: KColors.kThemePurple,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.wheelchair,
+                                    color: KColors.kThemePurple,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.personSwimming,
+                                    color: KColors.kThemePurple,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -207,47 +254,25 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 30.0),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         SizedBox(
-                            width: size.width * 0.5,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const HeadingText(
-                                  text: "Amenities available\n",
-                                  padding: EdgeInsets.zero,
-                                ),
-                                Row(
-                                  children: const [
-                                    FaIcon(
-                                      FontAwesomeIcons.wifi,
-                                      color: KColors.kThemePurple,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.squareParking,
-                                      color: KColors.kThemePurple,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.wheelchair,
-                                      color: KColors.kThemePurple,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    FaIcon(
-                                      FontAwesomeIcons.personSwimming,
-                                      color: KColors.kThemePurple,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )),
+                          height: 20,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
+                              Text(
+                                " pick date to Check the availability",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              CircleAvatar(
+                                backgroundColor: KColors.kGreenColor,
+                                radius: 30,
+                              ),
+                            ],
+                          ),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),

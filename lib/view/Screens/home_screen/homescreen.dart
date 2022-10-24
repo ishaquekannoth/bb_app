@@ -1,6 +1,5 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
-import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
@@ -27,10 +26,19 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const FaIcon(
-                FontAwesomeIcons.locationDot,
-                color: KColors.kThemePurple,
-              ),
+              locationProvider.isLoading == false
+                  ? IconButton(
+                      onPressed: () async =>
+                          await locationProvider.getLocationData(context),
+                      icon: const FaIcon(
+                        FontAwesomeIcons.locationDot,
+                        color: KColors.kThemePurple,
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator()),
               const SizedBox(
                 width: 5,
               ),
@@ -55,14 +63,17 @@ class HomeScreen extends StatelessWidget {
                         onTap: () => {},
                       )
                     ]
-                  : hotelListProvider.mainList.map((singleHotel) {
-                      return ImageWithTextCard(
-                        hotel: singleHotel,
-                        onTap: () => Navigator.of(context).pushNamed(
-                            Routes.singleHotelDetails,
-                            arguments: singleHotel),
-                      );
-                    }).toList()),
+                  : hotelListProvider.mainList
+                      .map((singleHotel) {
+                        return ImageWithTextCard(
+                          hotel: singleHotel,
+                          onTap: () => Navigator.of(context).pushNamed(
+                              Routes.singleHotelDetails,
+                              arguments: singleHotel),
+                        );
+                      })
+                      .take(5)
+                      .toList()),
           const SizedBox(
             height: 20,
           ),
@@ -71,13 +82,6 @@ class HomeScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const FaIcon(
-                      FontAwesomeIcons.filterCircleDollar,
-                      size: 18,
-                      color: KColors.kThemePurple,
-                    )),
                 DropdownButton<PriceSortType>(
                   hint: const Text("Price"),
                   isDense: true,
@@ -175,6 +179,15 @@ class HomeScreen extends StatelessWidget {
                       hotelListProvider.hotelTypesort(value!, context),
                   value: hotelListProvider.hotelSortType,
                 ),
+                IconButton(
+                    onPressed: () {
+                      hotelListProvider.onResetFilters();
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.rotateLeft,
+                      size: 18,
+                      color: KColors.kThemePurple,
+                    )),
               ],
             ),
           ),

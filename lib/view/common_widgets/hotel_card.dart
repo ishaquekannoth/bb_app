@@ -1,4 +1,5 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
+import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -26,6 +27,13 @@ class HotelCard extends StatelessWidget {
                   .pushNamed(Routes.singleHotelDetails, arguments: hotel);
             },
       child: Card(
+        elevation: 15,
+        shadowColor: Colors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: const BorderSide(
+              color: KColors.kThemePurple,
+            )),
         child: GFListTile(
             avatar: SizedBox(
               height: 100,
@@ -46,7 +54,6 @@ class HotelCard extends StatelessWidget {
                 ),
               ),
             ),
-          
             titleText: hotel == null
                 ? "Name : Not Available"
                 : hotel?.property?.propertyName,
@@ -59,11 +66,18 @@ class HotelCard extends StatelessWidget {
                 const Text("Price/night"),
                 Text(
                   hotel != null ? hotel!.price.toString() : "0",
-                  style: const TextStyle(fontWeight: FontWeight.bold,
-                  
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text("${hotel!.category!.category}")
+                Text("${hotel!.category!.category}"),
+                const Text(
+                  "Available",
+                  style: TextStyle(
+                      backgroundColor: Color.fromARGB(255, 11, 87, 13),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )
               ],
             )),
       ),

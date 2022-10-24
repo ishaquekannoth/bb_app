@@ -28,7 +28,6 @@ class HotelListRequest {
           return null;
         }
       } on Exception catch (_) {
-        print("Exception3");
         return null;
       }
     } else {
@@ -36,9 +35,9 @@ class HotelListRequest {
           message: "No Connection", type: PopUpType.toast);
       return null;
     }
-    
-      ShowMyPopUp.popUpMessenger(context,
-          message: "Server Unreachable", type: PopUpType.toast);
-      return null;
+
+    ShowMyPopUp.popUpMessenger(context,
+        message: "Server Unreachable", type: PopUpType.toast);
+    return null;
   }
 }

@@ -33,4 +33,7 @@ class SingleHotelViewModel with ChangeNotifier {
     this.guests = guests;
     notifyListeners();
   }
+
+ 
+
 }

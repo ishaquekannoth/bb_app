@@ -26,7 +26,7 @@ class ImageWithTextCard extends StatelessWidget {
           (FittedBox(
             child: CachedNetworkImage(
               fit: BoxFit.contain,
-              imageUrl:hotel==null?"https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg": hotel!.images!.first.first.url.toString(),
+              imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
               placeholder: (context, url) =>
                   const CircularProgressIndicator(),
               errorWidget: (context, url, error) =>
@@ -39,7 +39,7 @@ class ImageWithTextCard extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                  hotel==null?"No Data":hotel!.property!.propertyName.toString(),
+                  hotel==null?"":hotel!.property!.propertyName.toString(),
                     style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: KColors.kWhiteColor,
@@ -49,7 +49,7 @@ class ImageWithTextCard extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                  hotel==null?"Available":hotel!.property!.city.toString(),
+                  hotel==null?"":hotel!.property!.city.toString(),
                     style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: KColors.kWhiteColor,
