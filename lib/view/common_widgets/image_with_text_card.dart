@@ -23,15 +23,13 @@ class ImageWithTextCard extends StatelessWidget {
       onTap:hotel==null?()=>{} :onTap,
       child: Stack(
         children: [
-          (FittedBox(
-            child: CachedNetworkImage(
-              fit: BoxFit.contain,
-              imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
-              placeholder: (context, url) =>
-                  const CircularProgressIndicator(),
-              errorWidget: (context, url, error) =>
-                  Image.asset("lib/assets/images/NoImage.png"),
-            ),
+          (CachedNetworkImage(
+            fit: BoxFit.contain,
+            imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
+            placeholder: (context, url) =>
+                const CircularProgressIndicator(),
+            errorWidget: (context, url, error) =>
+                Image.asset("lib/assets/images/NoImage.png"),
           )),
           Positioned(
               bottom: 25,

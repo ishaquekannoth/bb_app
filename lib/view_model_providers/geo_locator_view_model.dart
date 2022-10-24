@@ -1,3 +1,4 @@
+import 'package:bb_app/services/connection_checker.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/geo_locations_service.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
@@ -14,47 +15,55 @@ class GeoLocatorViewModel extends ChangeNotifier {
   }
 
   getLocationData(context) async {
-    try {
-      isLoadingToggler();
+    final connectionOk = await isConnectionOk();
 
-      // currentLocation = Placemark();
-      var data = await determinePosition().onError((error, stackTrace) {
+    if (connectionOk) {
+      try {
         isLoadingToggler();
-        if (error.toString() == "GPS is disabled!,change it in the settings") {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return (MyAlertDialogue(
-                    onTap: () => Geolocator.openLocationSettings()
-                        .then((value) => Navigator.of(context).pop()),
-                    alertTitle: "Enable GPS?"));
-              });
-        }
-        if (error.toString() ==
-            "Location Access denied!! Change in App settings") {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return (MyAlertDialogue(
-                    onTap: () => Geolocator.openAppSettings()
-                        .then((value) => Navigator.of(context).pop()),
-                    alertTitle: "Open App Settings?"));
-              });
-        }
-        return ShowMyPopUp.popUpMessenger(context,
-            message: error.toString(),
-            type: PopUpType.toast,
-            toastColor: KColors.kRedColor);
-      });
-      List<Placemark> places =
-          await placemarkFromCoordinates(data.latitude, data.longitude);
 
-      currentLocation = places.first;
-      isLoadingToggler();
-    } on PlatformException {
-      isLoadingToggler();
-    } on Exception {
-      isLoadingToggler();
+        // currentLocation = Placemark();
+        var data = await determinePosition().onError((error, stackTrace) {
+          isLoadingToggler();
+          if (error.toString() ==
+              "GPS is disabled!,change it in the settings") {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return (MyAlertDialogue(
+                      onTap: () => Geolocator.openLocationSettings()
+                          .then((value) => Navigator.of(context).pop()),
+                      alertTitle: "Enable GPS?"));
+                });
+          }
+          if (error.toString() ==
+              "Location Access denied!! Change in App settings") {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return (MyAlertDialogue(
+                      onTap: () => Geolocator.openAppSettings()
+                          .then((value) => Navigator.of(context).pop()),
+                      alertTitle: "Open App Settings?"));
+                });
+          }
+          return ShowMyPopUp.popUpMessenger(context,
+              message: error.toString(),
+              type: PopUpType.toast,
+              toastColor: KColors.kRedColor);
+        });
+        List<Placemark> places =
+            await placemarkFromCoordinates(data.latitude, data.longitude);
+
+        currentLocation = places.first;
+        isLoadingToggler();
+      } on PlatformException {
+        isLoadingToggler();
+      } on Exception {
+        isLoadingToggler();
+      }
+    } else {
+      ShowMyPopUp.popUpMessenger(context,
+          message: "No internet", type: PopUpType.toast);
     }
   }
 
