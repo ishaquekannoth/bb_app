@@ -27,13 +27,9 @@ class HomeScreen extends StatelessWidget {
                 width: 10,
               ),
               locationProvider.isLoading == false
-                  ? IconButton(
-                      onPressed: () async =>
-                          await locationProvider.getLocationData(context),
-                      icon: const FaIcon(
-                        FontAwesomeIcons.locationDot,
-                        color: KColors.kThemePurple,
-                      ),
+                  ? const FaIcon(
+                      FontAwesomeIcons.locationDot,
+                      color: KColors.kThemePurple,
                     )
                   : const SizedBox(
                       height: 20,
@@ -42,11 +38,15 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 width: 5,
               ),
-              Text(
-                locationProvider.currentLocation.subAdministrativeArea ??
-                    "Location Unavailable",
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              GestureDetector(
+                onTap: () async =>
+                    await locationProvider.getLocationData(context),
+                child: Text(
+                  locationProvider.currentLocation.subAdministrativeArea ??
+                      "Click to Update Location",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 13),
+                ),
               ),
             ]),
           ),

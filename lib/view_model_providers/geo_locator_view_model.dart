@@ -12,12 +12,35 @@ class GeoLocatorViewModel extends ChangeNotifier {
   GeoLocatorViewModel(context) {
     getLocationData(context);
   }
+
   getLocationData(context) async {
     try {
       isLoadingToggler();
+
       // currentLocation = Placemark();
       var data = await determinePosition().onError((error, stackTrace) {
         isLoadingToggler();
+        if (error.toString() == "GPS is disabled!,change it in the settings") {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return (MyAlertDialogue(
+                    onTap: () => Geolocator.openLocationSettings()
+                        .then((value) => Navigator.of(context).pop()),
+                    alertTitle: "Enable GPS?"));
+              });
+        }
+        if (error.toString() ==
+            "Location Access denied!! Change in App settings") {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return (MyAlertDialogue(
+                    onTap: () => Geolocator.openAppSettings()
+                        .then((value) => Navigator.of(context).pop()),
+                    alertTitle: "Open App Settings?"));
+              });
+        }
         return ShowMyPopUp.popUpMessenger(context,
             message: error.toString(),
             type: PopUpType.toast,
