@@ -362,6 +362,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Text(hotel.roomNumbers!.first.unavailableDates.toString())
                       ],
                     ),
                   ),
@@ -376,29 +377,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 centerTitle: true,
-                // title: const Text(
-                //   "DETAIL",
-                //   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                // ),
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomLeft,
-            //   child: BottomNavigationBar(
-            //     backgroundColor: Colors.white54,
-            //     elevation: 0,
-            //     selectedItemColor: Colors.black,
-            //     items: [
-            //       BottomNavigationBarItem(
-            //           icon: Icon(Icons.search), title: Text("Search")),
-            //       BottomNavigationBarItem(
-            //           icon: Icon(Icons.favorite_border),
-            //           title: Text("Favorites")),
-            //       BottomNavigationBarItem(
-            //           icon: Icon(Icons.settings), title: Text("Settings")),
-            //     ],
-            //   ),
-            // )
+         
           ],
         ),
       ),

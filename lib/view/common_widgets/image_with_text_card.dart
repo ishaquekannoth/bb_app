@@ -25,7 +25,7 @@ class ImageWithTextCard extends StatelessWidget {
         children: [
           (CachedNetworkImage(
             fit: BoxFit.contain,
-            imageUrl:hotel==null?"": hotel!.images!.first.first.url.toString(),
+            imageUrl:hotel==null?"https://via.placeholder.com/150": hotel!.images!.first.first.url.toString(),
             placeholder: (context, url) =>
                 const CircularProgressIndicator(),
             errorWidget: (context, url, error) =>

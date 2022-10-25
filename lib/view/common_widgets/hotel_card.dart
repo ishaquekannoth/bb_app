@@ -45,7 +45,7 @@ class HotelCard extends StatelessWidget {
                   width: 100,
                   fit: BoxFit.cover,
                   imageUrl: hotel == null
-                      ? ""
+                      ? "https://via.placeholder.com/50"
                       : hotel!.images!.first.first.url.toString(),
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
