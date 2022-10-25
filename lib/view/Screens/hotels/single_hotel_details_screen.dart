@@ -24,11 +24,14 @@ class SingleHotelDetailsScreen extends StatelessWidget {
         body: Stack(
           children: [
             Container(
+                decoration: const BoxDecoration(
+                  color: KColors.kThemePurple,
+                ),
                 padding: const EdgeInsets.only(top: 20),
                 //  foregroundDecoration:
                 // const BoxDecoration(color: Colors.black26),
                 child: SizedBox(
-                    height: size.height * 0.4,
+                    height: size.height * 0.5,
                     child: GFCarousel(
                       autoPlay: true,
                       enlargeMainPage: true,
@@ -47,50 +50,29 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                             ));
                       }).toList(),
                     ))),
-
             SingleChildScrollView(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: size.height * .3),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: size.width * 0.5,
-                        child: Text(
-                          hotel.property?.propertyName ?? "No Data",
-                          style: const TextStyle(
-                              color: KColors.kBlackColor,
-                              fontSize: 28.0,
-                              fontWeight: FontWeight.bold),
+                  Container(
+                    padding: const EdgeInsets.only(left: 32),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: size.width * 0.5,
+                          child: Text(
+                            hotel.property?.propertyName ?? "No Data",
+                            style: const TextStyle(
+                                color: KColors.kWhiteColor,
+                                fontSize: 28.0,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 16.0,
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.purple,
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: const Text(
-                          "8.4/85 reviews",
-                          style: TextStyle(color: Colors.white, fontSize: 13.0),
-                        ),
-                      ),
-                      IconButton(
-                        color: Colors.white,
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          color: Colors.purple,
-                        ),
-                        onPressed: () {
-                          // hotelData.toggleFavourite();
-                        },
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.all(32.0),
@@ -216,37 +198,13 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                             DropdownButton<int>(
                               elevation: 10,
                               itemHeight: kMinInteractiveDimension,
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 0,
-                                  child: Text(
-                                    "1",
-                                    style: TextStyle(
-                                        color: KColors.kBlackColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
-                                  ),
-                                ),
-                                DropdownMenuItem(
-                                  value: 1,
-                                  child: Text(
-                                    "2",
-                                    style: TextStyle(
-                                        color: KColors.kBlackColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
-                                  ),
-                                ),
-                                DropdownMenuItem(
-                                  value: 2,
-                                  child: Text(
-                                    "3",
-                                    style: TextStyle(
-                                        color: KColors.kBlackColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17),
-                                  ),
-                                )
+                              items: [
+                                customDropDown<int>(
+                                    dispalyValue: "1", value: 0),
+                                customDropDown<int>(
+                                    dispalyValue: "2", value: 1),
+                                customDropDown<int>(
+                                    dispalyValue: "3", value: 2),
                               ],
                               onChanged: (value) =>
                                   pageController.onSelectGuests(value ?? 0),
@@ -362,7 +320,6 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(hotel.roomNumbers!.first.unavailableDates.toString())
                       ],
                     ),
                   ),
@@ -379,10 +336,23 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                 centerTitle: true,
               ),
             ),
-         
           ],
         ),
       ),
     );
   }
+}
+
+DropdownMenuItem<Type> customDropDown<Type>(
+    {required String dispalyValue, required Type value, double? fontSize}) {
+  return DropdownMenuItem<Type>(
+    value: value,
+    child: Text(
+      dispalyValue,
+      style: TextStyle(
+          color: KColors.kBlackColor,
+          fontWeight: FontWeight.bold,
+          fontSize: fontSize ?? 14),
+    ),
+  );
 }

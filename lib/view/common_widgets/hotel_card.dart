@@ -71,10 +71,14 @@ class HotelCard extends StatelessWidget {
                   ),
                 ),
                 Text("${hotel!.category!.category}"),
-                const Text(
-                  "Available",
-                  style: TextStyle(
-                      backgroundColor: Color.fromARGB(255, 11, 87, 13),
+                Text(
+                  hotel?.roomNumbers?.first.isBooked == false
+                      ? "Available"
+                      : "Unavailable",
+                  style:  TextStyle(
+                      backgroundColor: hotel?.roomNumbers?.first.isBooked == false
+                      ? KColors.kGreenColor
+                      : KColors.kRedColor,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 )

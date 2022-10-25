@@ -6,7 +6,7 @@ import 'package:bb_app/model/otp/otp_verification_request_model.dart';
 import 'package:bb_app/model/otp/otp_verification_response_model.dart';
 import 'package:bb_app/services/connection_checker.dart';
 import 'package:bb_app/services/dio_services.dart';
-import 'package:bb_app/utils/Url.dart';
+import 'package:bb_app/utils/url.dart';
 import 'package:dio/dio.dart';
 
 class OTPService {

@@ -6,8 +6,8 @@ Future<Position> determinePosition() async {
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    //await Geolocator.openLocationSettings();
-    return Future.error('GPS is disabled!,change it in the settings');
+   
+    return Future.error('GPS is disabled! change it in the settings');
   }
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {

@@ -25,7 +25,7 @@ class GeoLocatorViewModel extends ChangeNotifier {
         var data = await determinePosition().onError((error, stackTrace) {
           isLoadingToggler();
           if (error.toString() ==
-              "GPS is disabled!,change it in the settings") {
+              "GPS is disabled! change it in the settings") {
             showDialog(
                 context: context,
                 builder: (context) {

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/services/connection_checker.dart';
 import 'package:bb_app/services/dio_services.dart';
-import 'package:bb_app/utils/Url.dart';
+import 'package:bb_app/utils/url.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
 import 'package:dio/dio.dart';
 

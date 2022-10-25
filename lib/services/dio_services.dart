@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../utils/Url.dart';
+import '../utils/url.dart';
 
 class DioService {
   static final dio = Dio(BaseOptions(baseUrl: MyApiUrl.backendUrl));

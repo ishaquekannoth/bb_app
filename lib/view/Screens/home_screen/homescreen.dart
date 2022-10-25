@@ -1,5 +1,6 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
+import 'package:bb_app/view/Screens/hotels/single_hotel_details_screen.dart';
 import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
@@ -98,27 +99,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                   elevation: 10,
                   itemHeight: kMinInteractiveDimension,
-                  items: const [
-                    DropdownMenuItem(
-                      value: PriceSortType.lowToHigh,
-                      child: Text(
-                        "Price: Low  ",
-                        style: TextStyle(
-                            color: KColors.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: PriceSortType.highToLow,
-                      child: Text(
-                        "Price: High ",
-                        style: TextStyle(
-                            color: KColors.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
-                    ),
+                  items: [
+                    customDropDown<PriceSortType>(
+                        dispalyValue: "Price: Low",
+                        value: PriceSortType.lowToHigh),
+                    customDropDown<PriceSortType>(
+                        dispalyValue: "Price: high",
+                        value: PriceSortType.highToLow)
                   ],
                   onChanged: (value) => hotelListProvider.priceSort(value!),
                   value: hotelListProvider.priceSortType,
@@ -143,37 +130,16 @@ class HomeScreen extends StatelessWidget {
                   ),
                   elevation: 10,
                   itemHeight: kMinInteractiveDimension,
-                  items: const [
-                    DropdownMenuItem(
-                      value: HotelSortType.sortByHotels,
-                      child: Text(
-                        "Hotels",
-                        style: TextStyle(
-                            color: KColors.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: HotelSortType.sortByResort,
-                      child: Text(
-                        "Resorts",
-                        style: TextStyle(
-                            color: KColors.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: HotelSortType.sortByhomeStay,
-                      child: Text(
-                        "Home Stay",
-                        style: TextStyle(
-                            color: KColors.kBlackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14),
-                      ),
-                    )
+                  items: [
+                    customDropDown<HotelSortType>(
+                        dispalyValue: "Hotels",
+                        value: HotelSortType.sortByHotels),
+                    customDropDown<HotelSortType>(
+                        dispalyValue: "Resorts",
+                        value: HotelSortType.sortByResort),
+                    customDropDown<HotelSortType>(
+                        dispalyValue: "Home Stay",
+                        value: HotelSortType.sortByhomeStay),
                   ],
                   onChanged: (value) =>
                       hotelListProvider.hotelTypesort(value!, context),
