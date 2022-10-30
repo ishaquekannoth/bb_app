@@ -1,31 +1,5 @@
 import 'dart:convert';
 
-// class HotelModel extends ChangeNotifier {
-//   final String hotelId;
-//   final String hotelName;
-//   final String imageUrl;
-//   final String hotelLocation;
-//   bool? isBooked;
-//   bool? isFavourite;
-
-//   HotelModel(
-//       {required this.hotelId,
-//       required this.hotelName,
-//       required this.hotelLocation,
-//       required this.imageUrl,
-//       this.isFavourite = false,
-//       this.isBooked});
-
-//   toggleFavourite() {
-//     isFavourite = !isFavourite!;
-//     notifyListeners();
-//   }
-// }
-
-// To parse this JSON data, do
-//
-//     final roomsModel = roomsModelFromJson(jsonString);
-
 List<HotelModel> hotelModelFromJson(String str) =>
     List<HotelModel>.from(json.decode(str).map((x) => HotelModel.fromJson(x)));
 
@@ -95,7 +69,8 @@ class HotelModel {
         checkoutTime: json["checkout_time"] ?? "11 AM",
         images: List<List<Images>>.from(json["images"]
             .map((x) => List<Images>.from(x.map((x) => Images.fromJson(x))))),
-        roomNumbers: List<RoomNumber>.from(json["roomNumbers"].map((x) => RoomNumber.fromJson(x))),
+        roomNumbers: List<RoomNumber>.from(
+            json["roomNumbers"].map((x) => RoomNumber.fromJson(x))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"] ?? "No Data",

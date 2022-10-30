@@ -34,6 +34,10 @@ class SingleHotelViewModel with ChangeNotifier {
     notifyListeners();
   }
 
- 
-
+  int get totalGuest => guests;
+  DateTimeRange get dateTimeRange =>
+      pickedDate ??
+      DateTimeRange(
+          start: DateTime.now(),
+          end: DateTime.now().add(const Duration(days: 1)));
 }

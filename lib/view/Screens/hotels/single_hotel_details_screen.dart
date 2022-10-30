@@ -1,7 +1,9 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
+import 'package:bb_app/model/payments/checkout_options.dart';
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
+import 'package:bb_app/view_model_providers/razor_pay_view_model.dart';
 import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
     final pageController = Provider.of<SingleHotelViewModel>(context);
-
+    final paymentProider = Provider.of<RazorPayViewModel>(context);
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -310,9 +312,13 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 32)),
                             onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                  Routes.orderSummaryScreen,
-                                  arguments: hotel);
+                              
+                              paymentProider.makePayment(CheckOutOptions(
+                                  key: "rzp_test_2it08ULkreugOs",
+                                  currency: "INR",
+                                  amount: hotel.price!*100,
+                                  companyName: "StartUp",
+                                  orderId: ""),context,hotel);
                             },
                             child: const Text(
                               "Book Now",

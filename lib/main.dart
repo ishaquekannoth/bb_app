@@ -14,6 +14,7 @@ import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
 import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
 import 'package:bb_app/view_model_providers/main_page_navbar_provider.dart';
 import 'package:bb_app/view_model_providers/otp_request_view_model.dart';
+import 'package:bb_app/view_model_providers/razor_pay_view_model.dart';
 import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:bb_app/view_model_providers/sign_up_view_model.dart';
 import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
             create: (context) => SingleHotelViewModel()),
             ChangeNotifierProvider(
             create: (context) => GeoLocatorViewModel(context)),
+             ChangeNotifierProvider(
+            create: (context) => RazorPayViewModel()),
             
       ],
       child: MaterialApp(

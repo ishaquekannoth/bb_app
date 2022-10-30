@@ -1,5 +1,6 @@
 import 'package:bb_app/model/sign_in/sign_in_request_model.dart';
 import 'package:bb_app/model/sign_in/sign_in_response.dart';
+import 'package:bb_app/model/user_data.dart';
 import 'package:bb_app/services/registration_services/sign_in_service.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
@@ -10,7 +11,7 @@ class SignInViewModel extends ChangeNotifier {
   final passwordController = TextEditingController();
   bool isLoading = false;
   final signInFormKey = GlobalKey<FormState>();
-
+   UserData? signInSuccessData;
   void onSigninButtonPress(context) async {
     if (signInFormKey.currentState!.validate()) {
       isLoading = true;
@@ -27,6 +28,7 @@ class SignInViewModel extends ChangeNotifier {
         return;
       } else if (signInResponse.isSuccess == true) {
         isLoadingToggler();
+        signInSuccessData=UserData(email:data.email,token:signInResponse.token??"Null",name:"no Name" );
         Navigator.of(context).pushNamed(Routes.mainDisplayer);
       } else {
         ShowMyPopUp.popUpMessenger(context,
@@ -43,4 +45,5 @@ class SignInViewModel extends ChangeNotifier {
     isLoading = !isLoading;
     notifyListeners();
   }
+
 }

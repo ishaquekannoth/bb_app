@@ -10,7 +10,6 @@ import 'package:dio/dio.dart';
 class SignInService {
   Future<SignInResponseModel?> signMeIn(SignInRequestModel data) async {
     final connectionOk = await isConnectionOk();
-
     if (connectionOk) {
       try {
         final response = await DioService.postMethod(

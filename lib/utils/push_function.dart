@@ -1,3 +1,4 @@
+import 'package:bb_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class PushFunctions {
@@ -7,7 +8,10 @@ class PushFunctions {
 
   static pushAndRemoveUntil(context, page) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => page,), (route) => false);
+        MaterialPageRoute(
+          builder: (context) => page,
+        ),
+        (route) => false);
   }
 
   static pushReplace(context, page) {
@@ -15,9 +19,8 @@ class PushFunctions {
         .pushReplacement(MaterialPageRoute(builder: (context) => page));
   }
 
-  static pop(context){
+  static pop(context) {
     Navigator.of(context).pop();
+    
   }
 }
-
-
