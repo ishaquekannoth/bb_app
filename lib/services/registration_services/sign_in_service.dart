@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:bb_app/model/sign_in/sign_in_request_model.dart';
@@ -29,9 +30,9 @@ class SignInService {
           return SignInResponseModel(message: "Request timed out");
         } else {
           return SignInResponseModel(
-              isSuccess: false,
-              message: "Server unreachable",
-              token: "Invalid");
+            isSuccess: false,
+            message: "Server unreachable",
+          );
         }
       } on SocketException catch (e) {
         return SignInResponseModel(message: e.message);
@@ -42,7 +43,7 @@ class SignInService {
       }
     } else {
       return SignInResponseModel(
-          message: "Oops..No network", isSuccess: false, token: "Invalid");
+          message: "Oops..No network", isSuccess: false, profile: null);
     }
     return null;
   }

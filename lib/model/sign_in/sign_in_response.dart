@@ -1,13 +1,52 @@
-class SignInResponseModel {
-  SignInResponseModel({this.message, this.token, this.isSuccess});
+// class SignInResponseModel {
+//   SignInResponseModel({this.message, this.token, this.isSuccess});
 
-  String? message;
-  String? token;
+//   String? message;
+//   String? token;
+//   bool? isSuccess;
+//   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
+//       SignInResponseModel(
+//         isSuccess: json["created"]??false,
+//         message: json["message"] ?? "",
+//         token: json["jwt_key"] ?? "invalid",
+//       );
+// }
+class SignInResponseModel {
+  SignInResponseModel({
+   this.isSuccess,
+     this.profile,
+     this.message,
+  });
+
   bool? isSuccess;
+  Profile? profile;
+  String? message;
+
   factory SignInResponseModel.fromJson(Map<String, dynamic> json) =>
       SignInResponseModel(
-        isSuccess: json["created"]??false,
-        message: json["message"] ?? "",
-        token: json["jwt_key"] ?? "invalid",
+        isSuccess: json["success"]??false,
+        profile: Profile.fromJson(json["profile"]??{}),
+        message: json["message"]??"",
+      );
+}
+
+class Profile {
+  Profile({
+     this.name,
+     this.email,
+    this.phone,
+    required this.token,
+  });
+
+  String? name;
+  String? email;
+  String? phone;
+  String? token;
+
+  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+        name: json["name"] ?? "",
+        email: json["email"] ?? "",
+        phone: json["phone"] ?? "",
+        token: json["token"] ?? "Invalid",
       );
 }

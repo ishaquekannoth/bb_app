@@ -1,9 +1,7 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/model/payments/checkout_options.dart';
-import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -31,10 +29,11 @@ class RazorPayViewModel extends ChangeNotifier {
 
   void makePayment(CheckOutOptions options, context, HotelModel hotel) {
     try {
-   razorpay.open(options.toJson());
+      razorpay.open(options.toJson());
     } on Exception catch (e) {
       ShowMyPopUp.popUpMessenger(context,
           message: e.toString(), type: PopUpType.toast);
     }
   }
 }
+

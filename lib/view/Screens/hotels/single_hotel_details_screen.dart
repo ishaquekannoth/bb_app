@@ -1,7 +1,6 @@
 import 'package:bb_app/model/hotel_model/hotel_model.dart';
 import 'package:bb_app/model/payments/checkout_options.dart';
 import 'package:bb_app/utils/colors.dart';
-import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/custom_text_headings.dart';
 import 'package:bb_app/view_model_providers/razor_pay_view_model.dart';
 import 'package:bb_app/view_model_providers/single_hotel_provider.dart';
@@ -312,13 +311,15 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 16, horizontal: 32)),
                             onPressed: () {
-                              
-                              paymentProider.makePayment(CheckOutOptions(
-                                  key: "rzp_test_2it08ULkreugOs",
-                                  currency: "INR",
-                                  amount: hotel.price!*100,
-                                  companyName: "StartUp",
-                                  orderId: ""),context,hotel);
+                              paymentProider.makePayment(
+                                  CheckOutOptions(
+                                      key: "rzp_test_2it08ULkreugOs",
+                                      currency: "INR",
+                                      amount: hotel.price! * 100,
+                                      companyName: "StartUp",
+                                      orderId: ""),
+                                  context,
+                                  hotel);
                             },
                             child: const Text(
                               "Book Now",

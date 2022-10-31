@@ -3,12 +3,12 @@ import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
 import 'package:bb_app/view/Screens/hotels/single_hotel_details_screen.dart';
 import 'package:bb_app/view/Screens/make_order/order_summary.dart';
+import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_modal_screen.dart';
 import 'package:bb_app/view/Screens/registration/otp/otp_request_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_in/sign_in_screen.dart';
 import 'package:bb_app/view/Screens/registration/sign_up/sign_up_screen.dart';
-import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
 import 'package:bb_app/view/main_displayer_page/main_displayer_page.dart';
 import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
 import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
@@ -39,23 +39,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => SignUpViewModel()),
         ChangeNotifierProvider(
             create: (context) => HotelListViewModel(context)),
-            ChangeNotifierProvider(
-            create: (context) => SingleHotelViewModel()),
-            ChangeNotifierProvider(
+        ChangeNotifierProvider(create: (context) => SingleHotelViewModel()),
+        ChangeNotifierProvider(
             create: (context) => GeoLocatorViewModel(context)),
-             ChangeNotifierProvider(
-            create: (context) => RazorPayViewModel()),
-            
+         ChangeNotifierProvider(
+        create: (context) => RazorPayViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'BookMe Up',
         theme: ThemeData(
-          
           fontFamily: GoogleFonts.montserrat().fontFamily,
           primarySwatch: Colors.deepPurple,
         ),
-        initialRoute: Routes.mainDisplayer,
+        initialRoute: Routes.signIn,
         routes: {
           Routes.mainDisplayer: (context) => const MainDisplayer(),
           Routes.home: (context) => const HomeScreen(),
