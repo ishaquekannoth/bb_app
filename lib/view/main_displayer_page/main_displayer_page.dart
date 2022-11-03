@@ -11,13 +11,14 @@ class MainDisplayer extends StatelessWidget {
     final mainPageController = Provider.of<MainPageViewModel>(context);
     return SafeArea(
       child: Scaffold(
-          
           body: mainPageController.currentWidget,
           bottomNavigationBar: CurvedNavigationBar(
-            animationCurve: Curves.decelerate,
+              animationCurve: Curves.decelerate,
               height: 50,
               backgroundColor: const Color(0xff8E44AD),
-              onTap: (index) => mainPageController.set(index),
+              onTap: (index) {
+                mainPageController.setWidget=index;
+              },
               buttonBackgroundColor: Colors.white,
               items: const [
                 Icon(

@@ -1,15 +1,17 @@
 import 'package:bb_app/model/sign_in/sign_in_request_model.dart';
 import 'package:bb_app/model/sign_in/sign_in_response.dart';
 import 'package:bb_app/services/registration_services/sign_in_service.dart';
+import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/utils/routes.dart';
 import 'package:bb_app/view/common_widgets/show_snackbar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignInViewModel extends ChangeNotifier {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isLoading = false;
-//  FlutterSecureStorage signedInData = const FlutterSecureStorage();
+  FlutterSecureStorage signedInData = const FlutterSecureStorage();
   final signInFormKey = GlobalKey<FormState>();
 
   void onSigninButtonPress(context) async {
@@ -23,15 +25,23 @@ class SignInViewModel extends ChangeNotifier {
           await SignInService().signMeIn(data);
       if (signInResponse == null) {
         ShowMyPopUp.popUpMessenger(context,
-            type: PopUpType.snackBar, message: 'No response..Try Again');
+            toastColor: KColors.kRedColor,
+            type: PopUpType.toast,
+            message: 'No response..Try Again');
         isLoadingToggler();
         return;
       } else if (signInResponse.isSuccess == true) {
         isLoadingToggler();
-        Navigator.of(context).pushNamedAndRemoveUntil(Routes.mainDisplayer, (route) => false);
+        await signedInData.deleteAll();
+        await signedInData.write(
+            key: "token", value: signInResponse.profile?.token);
+        await signedInData.write(key: "isLoggedIn", value: "true");
+        Navigator.of(context)
+            .pushNamedAndRemoveUntil(Routes.mainDisplayer, (route) => false);
       } else {
         ShowMyPopUp.popUpMessenger(context,
-            type: PopUpType.snackBar,
+            type: PopUpType.toast,
+            toastColor: KColors.kRedColor,
             message: signInResponse.message.toString());
         isLoadingToggler();
         return;

@@ -1,6 +1,7 @@
 class Routes {
   static const signIn = '/signIn';
   static const signUp = '/signUp';
+  static const splash = '/splash';
   static const otpRequestScreen = '/otpRequest';
   static const mainDisplayer = "/mainDisplayer";
   static const home = "/home";

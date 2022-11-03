@@ -45,7 +45,7 @@ class HotelCard extends StatelessWidget {
                   width: 100,
                   fit: BoxFit.cover,
                   imageUrl: hotel == null
-                      ? "https://via.placeholder.com/50"
+                      ? "https://via.placeholder.com/100"
                       : hotel!.images!.first.first.url.toString(),
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
@@ -71,17 +71,17 @@ class HotelCard extends StatelessWidget {
                   ),
                 ),
                 Text("${hotel!.category!.category}"),
-                Text(
-                  hotel?.roomNumbers?.first.isBooked == false
-                      ? "Available"
-                      : "Unavailable",
-                  style:  TextStyle(
-                      backgroundColor: hotel?.roomNumbers?.first.isBooked == false
-                      ? KColors.kGreenColor
-                      : KColors.kRedColor,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                )
+                // Text(
+                //   hotel?.roomNumbers?.first.isBooked == false
+                //       ? "Available"
+                //       : "Unavailable",
+                //   style:  TextStyle(
+                //       backgroundColor: hotel?.roomNumbers?.first.isBooked == false
+                //       ? KColors.kGreenColor
+                //       : KColors.kRedColor,
+                //       color: Colors.white,
+                //       fontWeight: FontWeight.bold),
+                // )
               ],
             )),
       ),

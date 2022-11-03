@@ -5,7 +5,6 @@ import 'package:bb_app/view/common_widgets/hotel_card.dart';
 import 'package:bb_app/view/common_widgets/image_with_text_card.dart';
 import 'package:bb_app/view_model_providers/geo_locator_view_model.dart';
 import 'package:bb_app/view_model_providers/hotel_list_provider.dart';
-import 'package:bb_app/view_model_providers/sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
@@ -19,42 +18,40 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final hotelListProvider = Provider.of<HotelListViewModel>(context);
     final locationProvider = Provider.of<GeoLocatorViewModel>(context);
-    final signInProvider = Provider.of<SignInViewModel>(context);
+
     return SingleChildScrollView(
       child: Column(
         children: [
           SizedBox(
             height: 50,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  locationProvider.isLoading == false
-                      ? const FaIcon(
-                          FontAwesomeIcons.locationDot,
-                          color: KColors.kThemePurple,
-                        )
-                      : const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator()),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                    onTap: () async =>
-                        await locationProvider.getLocationData(context),
-                    child: Text(
-                      locationProvider.currentLocation.subAdministrativeArea ??
-                          "Click to Update Location",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 13),
-                    ),
-                  ),
-                  // Text(signInProvider.signInSuccessData.email.toString())
-                ]),
+            child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              const SizedBox(
+                width: 10,
+              ),
+              locationProvider.isLoading == false
+                  ? const FaIcon(
+                      FontAwesomeIcons.locationDot,
+                      color: KColors.kThemePurple,
+                    )
+                  : const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator()),
+              const SizedBox(
+                width: 5,
+              ),
+              GestureDetector(
+                onTap: () async =>
+                    await locationProvider.getLocationData(context),
+                child: Text(
+                  locationProvider.currentLocation.subAdministrativeArea ??
+                      "Click to Update Location",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 13),
+                ),
+              ),
+              // Text(signInProvider.signInSuccessData.email.toString())
+            ]),
           ),
           GFCarousel(
               pauseAutoPlayOnTouch: const Duration(seconds: 3),
@@ -98,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                         : hotelListProvider.priceSortType ==
                                 PriceSortType.highToLow
                             ? FontAwesomeIcons.sortUp
-                            : FontAwesomeIcons.question,
+                            : FontAwesomeIcons.dollarSign,
                     size: 15,
                     color: KColors.kThemePurple,
                   ),
@@ -129,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                             : hotelListProvider.hotelSortType ==
                                     HotelSortType.sortByhomeStay
                                 ? FontAwesomeIcons.house
-                                : FontAwesomeIcons.question,
+                                : FontAwesomeIcons.sort,
                     size: 15,
                     color: KColors.kThemePurple,
                   ),

@@ -1,6 +1,7 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 enum PopUpType { snackBar, toast }
 
 class ShowMyPopUp {
@@ -8,6 +9,7 @@ class ShowMyPopUp {
       {required String message,
       Color? snackbarColor,
       Color? toastColor,
+      Duration? duration,
       required PopUpType type}) {
     return type == PopUpType.snackBar
         ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -35,7 +37,7 @@ class MyAlertDialogue extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final String alertTitle;
-  final Future<void> Function()  onTap;
+  final Future<void> Function() onTap;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -44,9 +46,7 @@ class MyAlertDialogue extends StatelessWidget {
         ElevatedButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text("Cancel")),
-        ElevatedButton(
-           onPressed: onTap,
-            child: const Text("OK"))
+        ElevatedButton(onPressed: onTap, child: const Text("OK"))
       ],
     );
   }

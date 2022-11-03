@@ -2,7 +2,11 @@ import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/view/Screens/profile/widgets/account_grod_item.dart';
 import 'package:bb_app/view/Screens/profile/widgets/double_color_title.dart';
 import 'package:bb_app/view/Screens/profile/widgets/name_number_card.dart';
+import 'package:bb_app/view_model_providers/user_manager_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../view_model_providers/main_page_navbar_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -10,12 +14,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // final accountContoller = Provider.of<AccountViewModel>(context,listen: false);
+    final pageContoller = Provider.of<UserManagerViewModel>(context);
+    final pageController = Provider.of<MainPageViewModel>(context);
     return SingleChildScrollView(
       child: Stack(
         children: [
           SizedBox(
-            height: size.height*0.2 ,
+            height: size.height * 0.2,
             width: size.width,
             child: const ColoredBox(
               color: KColors.kThemePurple,
@@ -80,12 +85,12 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () {},
                     ),
                     AccountGridItem(
-                      icon: Icons.logout,
-                      title: 'Logout',
-                      onTap: () {
-                        //accountContoller.onLogoutButton(context);
-                      },
-                    ),
+                        icon: Icons.logout,
+                        title: 'Logout',
+                        onTap: () {
+                          pageContoller.onLogoutButtonPress();
+                          pageController.setIndex = 0;
+                        }),
                   ],
                 )
               ],

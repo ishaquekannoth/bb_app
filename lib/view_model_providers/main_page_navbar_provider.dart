@@ -1,7 +1,7 @@
 import 'package:bb_app/view/Screens/favourites/booking_history.dart';
 import 'package:bb_app/view/Screens/home_screen/homescreen.dart';
-import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:bb_app/view/Screens/my_order/orders_screen.dart';
+import 'package:bb_app/view/Screens/profile/profile.dart';
 import 'package:flutter/cupertino.dart';
 
 class MainPageViewModel extends ChangeNotifier {
@@ -13,7 +13,7 @@ class MainPageViewModel extends ChangeNotifier {
     const ProfileScreen()
   ];
 
-  set(int index) {
+  set setWidget(int index) {
     if (index != selectedIndex) {
       selectedIndex = index;
       notifyListeners();
@@ -21,4 +21,7 @@ class MainPageViewModel extends ChangeNotifier {
   }
 
   Widget get currentWidget => pages[selectedIndex];
+  set setIndex(index) {
+    selectedIndex = index;
+  }
 }

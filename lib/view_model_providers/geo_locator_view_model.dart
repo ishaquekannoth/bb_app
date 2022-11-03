@@ -49,7 +49,7 @@ class GeoLocatorViewModel extends ChangeNotifier {
           return ShowMyPopUp.popUpMessenger(context,
               message: error.toString(),
               type: PopUpType.toast,
-              toastColor: KColors.kRedColor);
+              toastColor: KColors.kBlackColor);
         });
         List<Placemark> places =
             await placemarkFromCoordinates(data.latitude, data.longitude);
