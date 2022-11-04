@@ -45,7 +45,7 @@ class HotelModel {
   String? checkinTime;
   String? checkoutTime;
   List<List<Images>>? images;
-  List<RoomNumber>? roomNumbers;
+  int? roomNumbers;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
@@ -69,8 +69,7 @@ class HotelModel {
         checkoutTime: json["checkout_time"] ?? "11 AM",
         images: List<List<Images>>.from(json["images"]
             .map((x) => List<Images>.from(x.map((x) => Images.fromJson(x))))),
-        roomNumbers: List<RoomNumber>.from(
-            json["roomNumbers"].map((x) => RoomNumber.fromJson(x))),
+        roomNumbers: json["roomNumbers"] ?? 0,
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"] ?? "No Data",
@@ -179,24 +178,4 @@ class Property {
       );
 }
 
-class RoomNumber {
-  RoomNumber({
-    this.number,
-    this.isBooked,
-    this.unavailableDates,
-    this.id,
-  });
 
-  String? number;
-  bool? isBooked;
-  List<dynamic>? unavailableDates;
-  String? id;
-
-  factory RoomNumber.fromJson(Map<String, dynamic> json) => RoomNumber(
-        number: json["number"] ?? "No Data",
-        isBooked: json["isBooked"] ?? false,
-        unavailableDates:
-            List<dynamic>.from(json["unavailableDates"] ?? [].map((x) => x)),
-        id: json["_id"] ?? "No Data",
-      );
-}

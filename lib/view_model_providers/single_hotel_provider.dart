@@ -26,6 +26,7 @@ class SingleHotelViewModel with ChangeNotifier {
     if (pickedDate == null) {
       return;
     }
+    print(pickedDate!.start);
     notifyListeners();
   }
 

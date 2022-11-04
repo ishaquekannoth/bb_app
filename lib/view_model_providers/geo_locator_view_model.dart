@@ -22,7 +22,7 @@ class GeoLocatorViewModel extends ChangeNotifier {
         isLoadingToggler();
 
         // currentLocation = Placemark();
-        var data = await determinePosition().onError((error, stackTrace) {
+        final data = await  determinePosition().onError((error, stackTrace) {
           isLoadingToggler();
           if (error.toString() ==
               "GPS is disabled! change it in the settings") {
