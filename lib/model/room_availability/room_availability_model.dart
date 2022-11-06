@@ -28,6 +28,6 @@ class RoomAvailabilityResponseModel {
 
   factory RoomAvailabilityResponseModel.fromJson(Map<String, dynamic> json) {
     return RoomAvailabilityResponseModel(
-        isAvailable: json["suceess"], message: json["message"]??"");
+        isAvailable: json["success"], message: json["message"]??"");
   }
 }

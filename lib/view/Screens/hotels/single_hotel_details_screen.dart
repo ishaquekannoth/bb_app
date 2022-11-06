@@ -17,6 +17,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
     final hotel = ModalRoute.of(context)?.settings.arguments as HotelModel;
     final size = MediaQuery.of(context).size;
     final pageController = Provider.of<SingleHotelViewModel>(context);
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -203,8 +204,11 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                       dispalyValue: "${index + 1}",
                                       value: index)),
                               onChanged: (value) =>
-                                  pageController.onSelectGuests(value ?? 0),
-                              value: pageController.guests,
+                                  pageController.onSelectGuests(
+                                      rooms: value!,
+                                      hotelId: hotel.id.toString(),
+                                      context: context),
+                              value: pageController.totalRooms,
                             ),
                           ],
                         ),
@@ -228,13 +232,34 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                           height: 20,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                " pick date to Check the availability",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                            children: [
+                              pageController.isActivelyChecking
+                                  ? SizedBox(
+                                      height: 20,
+                                      width: size.width * 0.6,
+                                      child: Row(
+                                        children: const [
+                                          Text("Checking Availability"),
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          SizedBox(
+                                              height: 20,
+                                              width: 20,
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        ],
+                                      ))
+                                  : const Text(
+                                      " Room Availability Indicator ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
                               CircleAvatar(
-                                backgroundColor: KColors.kGreenColor,
+                                backgroundColor:
+                                    pageController.roomAvailability == true
+                                        ? Colors.green
+                                        : Colors.red,
                                 radius: 30,
                               ),
                             ],
@@ -262,8 +287,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () {
-                                          pageController
-                                              .onDateSelector(context);
+                                          pageController.onDateSelector(
+                                              hotelId: hotel.id.toString(),
+                                              context: context);
                                         },
                                         child: Text(DateFormat('dd / MM / yy')
                                             .format(pageController
@@ -282,8 +308,9 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                                     ),
                                     TextButton(
                                         onPressed: () {
-                                          pageController
-                                              .onDateSelector(context);
+                                          pageController.onDateSelector(
+                                              hotelId: hotel.id.toString(),
+                                              context: context);
                                         },
                                         child: Text(DateFormat('dd / MM / yy')
                                             .format(pageController
@@ -312,18 +339,38 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                         const SizedBox(height: 10.0),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 16, horizontal: 32)),
-                            onPressed: () {},
-                            child: const Text(
-                              "Book Now",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          child: pageController.roomAvailability
+                              ? ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16, horizontal: 32)),
+                                  onPressed: () {},
+                                  child: const Text(
+                                    "Book Now",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              : Container(
+                                  height: size.height * 0.07,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(color: Colors.white)),
+                                  child: const Center(
+                                    child: Text(
+                                      "Try Another Date or with lesser rooms count",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: KColors.kWhiteColor,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
                         ),
                       ],
                     ),

@@ -4,10 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserManagerViewModel extends ChangeNotifier {
-  onLogoutButtonPress() {
+  FlutterSecureStorage? signIndata;
+  UserManagerViewModel() {
+    signIndata = const FlutterSecureStorage();
+  }
+  onLogoutButtonPress()async {
     FlutterSecureStorage pref = const FlutterSecureStorage();
-    pref.write(key: "isLoggedIn", value: "false");
-    pref.write(key: "token", value: "");
-    PushFunctions.pushAndRemoveUntilNamed(Routes.splash);
+  await  pref.deleteAll();
+  await   pref.write(key: "isLoggedIn", value: "false");
+  await   pref.write(key: "token", value: "");
+  PushFunctions.pushAndRemoveUntilNamed(Routes.splash);
   }
 }

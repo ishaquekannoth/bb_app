@@ -8,13 +8,11 @@ import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:provider/provider.dart';
 
 class HotelCard extends StatelessWidget {
-  const HotelCard({
-    this.favourite,
-    this.hotel,
-    Key? key,
-  }) : super(key: key);
+  const HotelCard({this.favourite, this.hotel, Key? key, required this.hotelId})
+      : super(key: key);
   final HotelModel? hotel;
   final void Function()? favourite;
+  final String hotelId;
   @override
   Widget build(BuildContext context) {
     final pageController = Provider.of<SingleHotelViewModel>(context);
@@ -22,7 +20,8 @@ class HotelCard extends StatelessWidget {
       onTap: hotel == null
           ? () => {}
           : () {
-              pageController.onInit();
+              pageController.onInit(hotelId,context);
+              
               Navigator.of(context)
                   .pushNamed(Routes.singleHotelDetails, arguments: hotel);
             },

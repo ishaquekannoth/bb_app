@@ -7,15 +7,23 @@ import 'package:dio/dio.dart';
 import '../../view/common_widgets/show_snackbar_widget.dart';
 
 class RoomAvailabilityService {
-  Future<bool?> isRooomAvailable(context) async {
+  Future<bool?> isRooomAvailable(
+      RoomAvailabiltyRequestModel roomData, context) async {
     var connectionOk = await isConnectionOk();
 
     if (connectionOk) {
       try {
-        final response =
-            await DioService.getMethod(url: MyApiUrl.roomAvailability);
-        if (response.statusCode >= 200 || response.statusCode <= 299){
-          return RoomAvailabilityResponseModel.fromJson(response.data).isAvailable;
+        final response = await DioService.postMethod(
+            url: MyApiUrl.roomAvailability, value: roomData.toJson());
+        if (response.statusCode >= 200 || response.statusCode <= 299) {
+          ShowMyPopUp.popUpMessenger(context,
+              message: RoomAvailabilityResponseModel.fromJson(response.data)
+                      .isAvailable
+                  ? "Rooms Are Available for the selected Date and Count"
+                  : "No Rooms available..Try changing dates or reducing Rooms Count",
+              type: PopUpType.toast);
+          return RoomAvailabilityResponseModel.fromJson(response.data)
+              .isAvailable;
         }
       } on DioError catch (e) {
         if (e.response?.statusCode == 500) {
@@ -28,12 +36,9 @@ class RoomAvailabilityService {
       }
     } else {
       ShowMyPopUp.popUpMessenger(context,
-          message: "No Connection", type: PopUpType.toast);
+          message: "No connection!!", type: PopUpType.toast);
       return false;
     }
-
-    ShowMyPopUp.popUpMessenger(context,
-        message: "Server Unreachable", type: PopUpType.toast);
-    return false;
+    return null;
   }
 }

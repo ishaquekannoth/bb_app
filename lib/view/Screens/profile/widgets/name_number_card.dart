@@ -1,11 +1,16 @@
 import 'package:bb_app/utils/colors.dart';
 import 'package:bb_app/view/Screens/profile/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
+
 class NameNumberCard extends StatelessWidget {
+  final String nameText;
+  final String phone;
   const NameNumberCard({
+    required this.nameText,
+    required this.phone,
     Key? key,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,15 +32,15 @@ class NameNumberCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleWidget(
-                    text: 'Ishaque',
+                  TitleWidget(
+                    text: nameText,
                     fontSize: 20,
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   TitleWidget(
-                    text: '+91 9747344535',
+                    text: phone,
                     fontSize: 16,
                     color: Colors.grey.shade600,
                   ),

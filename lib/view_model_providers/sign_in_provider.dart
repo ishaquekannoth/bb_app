@@ -13,6 +13,7 @@ class SignInViewModel extends ChangeNotifier {
   bool isLoading = false;
   FlutterSecureStorage signedInData = const FlutterSecureStorage();
   final signInFormKey = GlobalKey<FormState>();
+  
 
   void onSigninButtonPress(context) async {
     if (signInFormKey.currentState!.validate()) {
@@ -36,6 +37,9 @@ class SignInViewModel extends ChangeNotifier {
         await signedInData.write(
             key: "token", value: signInResponse.profile?.token);
         await signedInData.write(key: "isLoggedIn", value: "true");
+        await signedInData.write(key: "emailId", value: signInResponse.profile!.email.toString());
+        await signedInData.write(key: "name", value: signInResponse.profile!.name.toString());
+        await signedInData.write(key: "phone", value: signInResponse.profile!.phone.toString());
         Navigator.of(context)
             .pushNamedAndRemoveUntil(Routes.mainDisplayer, (route) => false);
       } else {

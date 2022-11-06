@@ -190,6 +190,7 @@ class HomeScreen extends StatelessWidget {
                           : hotelListProvider.hotelList.length,
                       itemBuilder: (context, index) {
                         return HotelCard(
+                            hotelId:hotelListProvider.hotelList[index].id.toString() ,
                             hotel: hotelListProvider.hotelList.isNotEmpty
                                 ? hotelListProvider.hotelList[index]
                                 : null);

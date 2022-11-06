@@ -5,5 +5,5 @@ class MyApiUrl {
   static const String signIn = "loginUser";
   static const String signUp = "userSignup";
   static const String getRoom = "getRoom";
-  static const String roomAvailability = "roomAvailable"; 
+  static const String roomAvailability = "oneSearch"; 
 }

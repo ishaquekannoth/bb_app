@@ -14,8 +14,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final pageContoller = Provider.of<UserManagerViewModel>(context);
-    final pageController = Provider.of<MainPageViewModel>(context);
+    final userPageContoller = Provider.of<UserManagerViewModel>(context);
+    final mainPageController = Provider.of<MainPageViewModel>(context);
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -45,7 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const NameNumberCard(),
+                const NameNumberCard(nameText: "Ishaque", phone: "9747344535"),
                 const SizedBox(
                   height: 10,
                 ),
@@ -88,8 +88,8 @@ class ProfileScreen extends StatelessWidget {
                         icon: Icons.logout,
                         title: 'Logout',
                         onTap: () {
-                          pageContoller.onLogoutButtonPress();
-                          pageController.setIndex = 0;
+                          userPageContoller.onLogoutButtonPress();
+                          mainPageController.setIndex = 0;
                         }),
                   ],
                 )
