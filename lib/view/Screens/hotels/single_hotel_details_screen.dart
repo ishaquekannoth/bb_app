@@ -236,7 +236,7 @@ class SingleHotelDetailsScreen extends StatelessWidget {
                               pageController.isActivelyChecking
                                   ? SizedBox(
                                       height: 20,
-                                      width: size.width * 0.6,
+                                      width: size.width * 0.5,
                                       child: Row(
                                         children: const [
                                           Text("Checking Availability"),

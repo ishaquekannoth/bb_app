@@ -16,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final userPageContoller = Provider.of<UserManagerViewModel>(context);
     final mainPageController = Provider.of<MainPageViewModel>(context);
+
     return SingleChildScrollView(
       child: Stack(
         children: [
@@ -45,7 +46,9 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const NameNumberCard(nameText: "Ishaque", phone: "9747344535"),
+                NameNumberCard(
+                    nameText: userPageContoller.email,
+                    phone: userPageContoller.phone),
                 const SizedBox(
                   height: 10,
                 ),

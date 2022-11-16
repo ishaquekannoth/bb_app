@@ -22,6 +22,7 @@ class TitleWidget extends StatelessWidget {
         fontSize: fontSize, 
         fontWeight: FontWeight.bold,
         letterSpacing: 1,
+        overflow: TextOverflow.ellipsis
         ),
     );
   }

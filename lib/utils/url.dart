@@ -6,4 +6,6 @@ class MyApiUrl {
   static const String signUp = "userSignup";
   static const String getRoom = "getRoom";
   static const String roomAvailability = "oneSearch"; 
+  static const String booking = "booking"; 
+
 }

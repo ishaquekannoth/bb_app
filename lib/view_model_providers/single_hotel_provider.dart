@@ -54,6 +54,7 @@ class SingleHotelViewModel with ChangeNotifier {
             hotelId: hotelId,
             numberOfRooms: _totalRooms),
         context);
+
     notifyListeners();
   }
 
